@@ -8,11 +8,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
 import poei.persistance.bean.User;
 import poei.persistance.dao.IUserDao;
 import poei.persistance.factory.HibernateFactory;
 
+
+@Repository
 public class UserDao implements IUserDao {
 
 	private SessionFactory sessionFactory = HibernateFactory.getSessionFactory();
