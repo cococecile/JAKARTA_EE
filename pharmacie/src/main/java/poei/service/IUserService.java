@@ -11,6 +11,6 @@ public interface IUserService {
 	 * 
 	 * @return utilisateurs
 	 */
-	List<UserDto> findAll();
+	//List<UserDto> findAll();
 
 }

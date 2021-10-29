@@ -8,25 +8,29 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
-import poei.persistance.bean.User;
+import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
 import poei.persistance.factory.HibernateFactory;
 
+@Repository
 public class UserDao implements IUserDao {
 
-	private SessionFactory sessionFactory = HibernateFactory.getSessionFactory();
-	// private static final SessionFactory sessionFactory = new
-	// Configuration().configure().buildSessionFactory();
-
+	//private SessionFactory sessionFactory = HibernateFactory.getSessionFactory();
+	
+	public UserDao() {
+		// Empty method
+	}
+/**
 	@Override
-	public List<User> findAllUser() {
+	public List<UserDo> findAllUser() {
 		try (final Session session = sessionFactory.openSession()) {
 			final Transaction transaction = session.beginTransaction();
 			String req = "From User";
 
-			final Query<User> query = session.createQuery(req, User.class);
-			final List<User> listeUserDo = query.getResultList();
+			final Query<UserDo> query = session.createQuery(req, UserDo.class);
+			final List<UserDo> listeUserDo = query.getResultList();
 			session.flush();
 			transaction.commit();
 			return listeUserDo;
@@ -36,6 +40,6 @@ public class UserDao implements IUserDao {
 			hibernateException.printStackTrace();
 		}
 		return new ArrayList<>();
-	}
+	}*/
 
 }
