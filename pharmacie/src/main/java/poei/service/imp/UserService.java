@@ -5,16 +5,20 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import poei.persistance.bean.User;
+import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
-import poei.service.util.MD5Encryption;
+import poei.util.cryptage.MD5Encryption;
 
 public class UserService implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;
+
+	public UserService() {
+		// Empty method
+	}
 
 	/**
 	 * permet de mapper un userDo en userDto
@@ -22,7 +26,7 @@ public class UserService implements IUserService {
 	 * @param user
 	 * @return un userDto
 	 */
-	public static UserDto mapToDto(final User user) {
+	public static UserDto mapToDto(final UserDo user) {
 		final UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
 		userDto.setName(user.getName());
@@ -39,9 +43,9 @@ public class UserService implements IUserService {
 	 * @param listeUserDo
 	 * @return
 	 */
-	public static List<UserDto> mapToListDto(final List<User> listeUserDo) {
+	public static List<UserDto> mapToListDto(final List<UserDo> listeUserDo) {
 		final List<UserDto> listeUserDto = new ArrayList<>();
-		for (final User userDo : listeUserDo) {
+		for (final UserDo userDo : listeUserDo) {
 			listeUserDto.add(mapToDto(userDo));
 		}
 		return listeUserDto;
@@ -53,18 +57,23 @@ public class UserService implements IUserService {
 	 * @param userDto
 	 * @return le userDo
 	 */
-	public static User mapToDo(final UserDto userDto) {
+	public static UserDo mapToDo(final UserDto userDto) {
 		final String newPassword = MD5Encryption.encrypt(userDto.getMot_de_passe());
-		final User userDo = User.buildUserDo(userDto.getId(), userDto.getName(), userDto.getPrenom(),
+		final UserDo userDo = UserDo.buildUserDo(userDto.getId(), userDto.getName(), userDto.getPrenom(),
 				userDto.getAdresse(), newPassword, userDto.getEmail());
 		return userDo;
 	}
-	
+
 	@Override
 	public List<UserDto> findAll() {
 		List<UserDto> liste = mapToListDto(userDao.findAllUser());
 		return liste;
 	}
-	
-	
+
+	@Override
+	public boolean validate(String email, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
