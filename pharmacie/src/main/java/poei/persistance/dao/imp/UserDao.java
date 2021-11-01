@@ -8,24 +8,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
-import poei.persistance.factory.HibernateFactory;
 
-@Repository
 public class UserDao implements IUserDao {
 
-	//private SessionFactory sessionFactory = HibernateFactory.getSessionFactory();
+	private SessionFactory sessionFactory;
 	
-	public UserDao() {
-		// Empty method
-	}
-/**
+	
+	
+	@Transactional
 	@Override
 	public List<UserDo> findAllUser() {
-		try (final Session session = sessionFactory.openSession()) {
+		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
 			String req = "From User";
 
@@ -40,6 +37,6 @@ public class UserDao implements IUserDao {
 			hibernateException.printStackTrace();
 		}
 		return new ArrayList<>();
-	}*/
+	}
 
 }

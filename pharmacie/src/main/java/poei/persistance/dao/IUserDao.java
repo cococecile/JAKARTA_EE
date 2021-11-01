@@ -11,6 +11,6 @@ public interface IUserDao {
 	 * 
 	 * @return la liste des users par ordre alphabÃ©tique
 	 */
-	//List<UserDo> findAllUser();
+	List<UserDo> findAllUser();
 
 }

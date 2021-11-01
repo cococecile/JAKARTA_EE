@@ -12,7 +12,7 @@ import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 import poei.service.util.MD5Encryption;
 
-@Service
+
 public class UserService implements IUserService {
 
 	@Autowired
