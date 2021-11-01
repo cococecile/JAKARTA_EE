@@ -73,4 +73,11 @@ public class UserService implements IUserService {
 	}
 	
 	
+	@Override
+	public boolean validate(String email, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
 }

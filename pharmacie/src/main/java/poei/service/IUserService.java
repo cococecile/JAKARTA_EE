@@ -13,4 +13,14 @@ public interface IUserService {
 	 */
 	List<UserDto> findAll();
 
+	/**
+	 * Permet de matcher un email et le mot de passe 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
+	boolean validate(String email, String password);
+	
+	
+
 }
