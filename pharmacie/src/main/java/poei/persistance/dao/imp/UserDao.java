@@ -8,17 +8,17 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
 
+@Repository
 public class UserDao implements IUserDao {
 
 	private SessionFactory sessionFactory;
-	
-	
-	
+
 	@Transactional
 	@Override
 	public List<UserDo> findAllUser() {

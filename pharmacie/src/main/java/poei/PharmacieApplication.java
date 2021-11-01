@@ -55,10 +55,10 @@ public class PharmacieApplication {
 		properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
 		properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
 		properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-		//properties.put("hibernate.hbm2ddl.import_file", env.getProperty("classpath:/import.sql"));
+		// properties.put("hibernate.hbm2ddl.import_file",
+		// env.getProperty("classpath:/import.sql"));
 		properties.put("current_session_context_class",
 				env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
-		
 
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
@@ -82,7 +82,9 @@ public class PharmacieApplication {
 
 		return transactionManager;
 	}
-
+	
+	
+	@Bean()
 	public Resource[] loadResources() {
 		Resource[] resources = null;
 		try {

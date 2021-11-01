@@ -24,28 +24,27 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		response.sendRedirect("login.jsp");
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		 try {
-	            authenticate(req, resp);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+		try {
+			authenticate(req, resp);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	
-	 private void authenticate(HttpServletRequest request, HttpServletResponse response)
-			    throws Exception {
-			        String username = request.getParameter("username");
-			        String password = request.getParameter("password");
-			        final UserDto connectedUser = userService.findUserForConnexion(username, password);
 
-			        if ( connectedUser != null) {
-			            RequestDispatcher dispatcher = request.getRequestDispatcher("login-success.jsp");
-			            dispatcher.forward(request, response);
-			        } else {
-			            throw new Exception("Login not successful..");
-			        }
-			    }
+	private void authenticate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		final UserDto connectedUser = userService.findUserForConnexion(username, password);
+
+		if (connectedUser != null) {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login-success.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			throw new Exception("Login not successful..");
+		}
+	}
 
 }

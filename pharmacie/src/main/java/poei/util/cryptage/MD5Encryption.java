@@ -1,4 +1,4 @@
-package poei.service.util;
+package poei.util.cryptage;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;

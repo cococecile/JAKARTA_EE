@@ -9,7 +9,7 @@ import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
-import poei.service.util.MD5Encryption;
+import poei.util.cryptage.MD5Encryption;
 
 public class UserService implements IUserService {
 
