@@ -65,12 +65,12 @@ public class UserService implements IUserService {
 				userDto.getAdresse(), newPassword, userDto.getEmail());
 		return userDo;
 	}
-	/**	
+	
 	@Override
 	public List<UserDto> findAll() {
 		List<UserDto> liste = mapToListDto(userDao.findAllUser());
 		return liste;
 	}
-	*/
+	
 	
 }
