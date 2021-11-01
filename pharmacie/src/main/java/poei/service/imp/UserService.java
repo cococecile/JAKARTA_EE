@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 	public static UserDto mapToDto(final UserDo user) {
 		final UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
-		userDto.setName(user.getName());
+		userDto.setNom(user.getNom());
 		userDto.setPrenom(user.getPrenom());
 		userDto.setAdresse(user.getAdresse());
 		userDto.setMot_de_passe(user.getMot_de_passe());
@@ -59,44 +59,58 @@ public class UserService implements IUserService {
 	 */
 	public static UserDo mapToDo(final UserDto userDto) {
 		final String newPassword = MD5Encryption.encrypt(userDto.getMot_de_passe());
-		final UserDo userDo = UserDo.buildUserDo(userDto.getId(), userDto.getName(), userDto.getPrenom(),
+		final UserDo userDo = UserDo.buildUserDo(userDto.getId(), userDto.getNom(), userDto.getPrenom(),
 				userDto.getAdresse(), newPassword, userDto.getEmail());
 		return userDo;
 	}
 
 	@Override
 	public List<UserDto> findAll() {
-		List<UserDto> liste = mapToListDto(userDao.findAllUser());
+		final List<UserDto> liste = mapToListDto(userDao.findAllUser());
 		return liste;
 	}
 
 	@Override
-	public UserDto findUserForConnexion(String email, String password) {
-		// TODO Auto-generated method stub
+	public UserDto findUserForConnexion(final String email, final String password) {
+		final UserDto connectedUser = mapToDto(userDao.findConnectedUSer(email,password));
+		
+		if (connectedUser!= null) {
+			return connectedUser;
+		}
 		return null;
 	}
 
 	@Override
-	public UserDto findUser(int id) {
-		// TODO Auto-generated method stub
+	public UserDto findUser(final int id) {
+		final UserDto userDto = mapToDto(userDao.findUser(id));
+		if (userDto != null) {
+			return userDto;
+		} 
 		return null;
 	}
 
 	@Override
-	public UserDto createUser(UserDto userDto) {
-		// TODO Auto-generated method stub
+	public UserDto createUser(final UserDto userDto) {
+		final UserDto createdUser = mapToDto(userDao.create(mapToDo(userDto)));
+		if (createdUser!= null) {
+			return createdUser;
+		}
 		return null;
 	}
 
 	@Override
-	public UserDto updateUSer(UserDto userDto, int id) {
-		// TODO Auto-generated method stub
+	public UserDto updateUSer(final UserDto userDto, final int id) {
+		final UserDto updatedUser = mapToDto(userDao.update(mapToDo(userDto), id));
+		if (updatedUser != null) {
+			return updatedUser;
+		}
 		return null;
 	}
 
 	@Override
-	public void delete(int id) {
-		// TODO Auto-generated method stub
+	public boolean delete(final int id) {
+		final boolean resulat = userDao.delete(id);
+		return resulat;
 
 	}
 

@@ -22,4 +22,22 @@ public class ArticleDao implements IArticleDao {
 		return null;
 	}
 
+	@Override
+	public ArticleDo createArticle(ArticleDo article) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArticleDo updateArticle(ArticleDo articleDo, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -21,11 +21,11 @@ public class UserDto {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getNom() {
 		return nom;
 	}
 
-	public void setName(String name) {
+	public void setNom(String name) {
 		this.nom = name;
 	}
 

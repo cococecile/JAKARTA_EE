@@ -52,6 +52,6 @@ public interface IUserService {
 	 * 
 	 * @param id
 	 */
-	void delete(final int id);
+	boolean delete(final int id);
 
 }
