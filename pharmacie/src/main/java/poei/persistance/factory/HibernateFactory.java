@@ -22,7 +22,7 @@ public class HibernateFactory {
 			if (sessionFactory == null) {
 				// on l'initialise : on va chercher l'emplacement par défaut du
 				// hibernate.cgf.xml
-				sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
+				sessionFactory = new Configuration().configure().buildSessionFactory();
 				// si on veut utiliser un autre nom/emplacement, il faut le préciser dans le
 				// .configure()
 			}

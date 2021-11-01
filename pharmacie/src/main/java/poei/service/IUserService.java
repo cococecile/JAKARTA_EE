@@ -1,9 +1,5 @@
 package poei.service;
 
-import java.util.List;
-
-import poei.presentation.bean.UserDto;
-
 public interface IUserService {
 
 	/**
@@ -11,6 +7,6 @@ public interface IUserService {
 	 * 
 	 * @return utilisateurs
 	 */
-	List<UserDto> findAll();
+	//List<UserDto> findAll();
 
 }

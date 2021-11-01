@@ -2,7 +2,7 @@ package poei.persistance.dao;
 
 import java.util.List;
 
-import poei.persistance.bean.User;
+import poei.persistance.bean.UserDo;
 
 public interface IUserDao {
 
@@ -11,6 +11,6 @@ public interface IUserDao {
 	 * 
 	 * @return la liste des users par ordre alphabÃ©tique
 	 */
-	List<User> findAllUser();
+	//List<UserDo> findAllUser();
 
 }

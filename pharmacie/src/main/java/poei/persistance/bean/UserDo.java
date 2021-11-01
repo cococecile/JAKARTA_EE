@@ -1,6 +1,7 @@
 package poei.persistance.bean;
 
-public class User {
+
+public class UserDo {
 	
 	private Integer id;
 	private String nom;
@@ -9,7 +10,7 @@ public class User {
 	private String email;
 	private String mot_de_passe;
 
-	public User() {
+	public UserDo() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -61,9 +62,9 @@ public class User {
 		this.mot_de_passe = mot_de_passe;
 	}
 
-	public static User buildUserDo(Integer id, String name, String prenom, String adresse, String mot_de_passe,
+	public static UserDo buildUserDo(Integer id, String name, String prenom, String adresse, String mot_de_passe,
 			String email) {
-		final User userDo = new User();
+		final UserDo userDo = new UserDo();
 		userDo.id = id;
 		userDo.nom = name;
 		userDo.prenom = prenom;

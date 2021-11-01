@@ -25,8 +25,11 @@
 		<!-- <property name="format_sql>true</property> -->
 		
 		<!-- Liste des fichiers de Mapping hbm pour chaque table / Do par domaine -->
-		<!-- hbm domaine User -->
-		<mapping resource="hbm/User.hbm.xml" />
+		<!-- hbm domaine UserDo -->
+		<mapping resource="src/main/resources/hbm/User.hbm.xml" />
+		
+		<!-- hbm domaine ArticleDo -->
+		<mapping resource="src/main/resources/hbm/ArticleDo.hbm.xml" />
 		
 		
 	</session-factory>
