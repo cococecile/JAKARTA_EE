@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
@@ -12,12 +11,11 @@ import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 import poei.service.util.MD5Encryption;
 
-
 public class UserService implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;
-	
+
 	public UserService() {
 		// Empty method
 	}
@@ -65,19 +63,41 @@ public class UserService implements IUserService {
 				userDto.getAdresse(), newPassword, userDto.getEmail());
 		return userDo;
 	}
-	
+
 	@Override
 	public List<UserDto> findAll() {
 		List<UserDto> liste = mapToListDto(userDao.findAllUser());
 		return liste;
 	}
-	
-	
+
 	@Override
-	public boolean validate(String email, String password) {
+	public UserDto findUserForConnexion(String email, String password) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
-	
-	
+
+	@Override
+	public UserDto findUser(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDto createUser(UserDto userDto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public UserDto updateUSer(UserDto userDto, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+
+	}
+
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
 @WebServlet("/login")
@@ -29,7 +30,6 @@ public class LoginController extends HttpServlet {
 		 try {
 	            authenticate(req, resp);
 	        } catch (Exception e) {
-	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
 	}
@@ -38,8 +38,9 @@ public class LoginController extends HttpServlet {
 			    throws Exception {
 			        String username = request.getParameter("username");
 			        String password = request.getParameter("password");
+			        final UserDto connectedUser = userService.findUserForConnexion(username, password);
 
-			        if (userService.validate(username, password)) {
+			        if ( connectedUser != null) {
 			            RequestDispatcher dispatcher = request.getRequestDispatcher("login-success.jsp");
 			            dispatcher.forward(request, response);
 			        } else {
