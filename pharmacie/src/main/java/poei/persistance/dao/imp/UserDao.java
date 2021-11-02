@@ -18,11 +18,13 @@ import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
 
 @Repository
+@Transactional
 public class UserDao implements IUserDao {
 
 	private SessionFactory sessionFactory;
 
-	@Transactional
+	
+
 	@Override
 	public List<UserDo> findAllUser() {
 		try (final Session session = sessionFactory.getCurrentSession()) {
@@ -65,8 +67,8 @@ public class UserDao implements IUserDao {
 	public UserDo findConnectedUSer(final String email, final String mot_de_passe) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
-			final Query<UserDo> query = session.createQuery("From UserDo where email = :email and mot_de_passe = :mot_de_passe",
-					UserDo.class);
+			final Query<UserDo> query = session
+					.createQuery("From UserDo where email = :email and mot_de_passe = :mot_de_passe", UserDo.class);
 			// on initialise le paramètre
 			query.setParameter("email", email);
 			query.setParameter("mot_de_passe", mot_de_passe);
@@ -135,18 +137,18 @@ public class UserDao implements IUserDao {
 	@Override
 	public boolean delete(final int id) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
-			
-			//creation de la transaction
 			final Transaction transaction = session.beginTransaction();
-			
-			//delete dans query
+
+			// delete dans query,
 			final UserDo userDo = session.load(UserDo.class, id);
-			session.delete(userDo);
-			
-			session.flush();
-			transaction.commit();
-			return true;
-			
+			if (null != userDo) {
+				session.delete(userDo);
+
+				session.flush();
+				transaction.commit();
+				return true;
+			}
+
 		} catch (final HibernateException | EntityNotFoundException exception) {
 			exception.printStackTrace();
 		}

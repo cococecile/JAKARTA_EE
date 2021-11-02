@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
@@ -11,14 +12,13 @@ import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 import poei.util.cryptage.MD5Encryption;
 
+@Service
 public class UserService implements IUserService {
 
 	@Autowired
 	private IUserDao userDao;
 
-	public UserService() {
-		// Empty method
-	}
+	
 
 	/**
 	 * permet de mapper un userDo en userDto
@@ -72,10 +72,11 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDto findUserForConnexion(final String email, final String password) {
-		final UserDto connectedUser = mapToDto(userDao.findConnectedUSer(email,password));
-		
-		if (connectedUser!= null) {
-			return connectedUser;
+		 
+		final String cryptPassword = MD5Encryption.encrypt(password);
+		final UserDo connectedUser = userDao.findConnectedUSer(email,cryptPassword);
+		if (null != connectedUser) {
+			return mapToDto(connectedUser);
 		}
 		return null;
 	}
