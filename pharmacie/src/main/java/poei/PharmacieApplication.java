@@ -1,6 +1,5 @@
 package poei;
 
-import java.io.IOException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -15,9 +14,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.core.io.support.ResourcePatternUtils;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -75,7 +72,6 @@ public class PharmacieApplication {
 		factoryBean.setDataSource(dataSource);
 		factoryBean.setHibernateProperties(properties);
 		factoryBean.afterPropertiesSet();
-		factoryBean.setMappingLocations(loadResources());
 
 		//
 		SessionFactory sf = factoryBean.getObject();
@@ -89,17 +85,6 @@ public class PharmacieApplication {
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 
 		return transactionManager;
-	}
-
-	public Resource[] loadResources() {
-		Resource[] resources = null;
-		try {
-			resources = ResourcePatternUtils.getResourcePatternResolver(rl).getResources("classpath:/hbm/*.hbm.xml");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return resources;
 	}
 
 }

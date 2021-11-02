@@ -1,13 +1,32 @@
 package poei.persistance.bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "utilisateur")
 public class UserDo {
-	
+	@Id
+	@GeneratedValue
+	@Column(name = "id", nullable = false)
 	private Integer id;
+	
+	@Column(name = "nom", length = 128, nullable = false)
 	private String nom;
+	
+	@Column(name = "prenom", length = 128, nullable = false)
 	private String prenom;
+	
+	@Column(name = "adresse", length = 400, nullable = true)
 	private String adresse;
+	
+	@Column(name = "email", length = 128, nullable = false)
 	private String email;
+	
+	@Column(name = "", length = 128, nullable = false)
 	private String mot_de_passe;
 
 	public UserDo() {
