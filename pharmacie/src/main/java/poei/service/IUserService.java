@@ -1,5 +1,9 @@
 package poei.service;
 
+import java.util.List;
+
+import poei.presentation.bean.UserDto;
+
 public interface IUserService {
 
 	/**

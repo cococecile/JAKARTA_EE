@@ -3,6 +3,7 @@ package poei.service;
 import java.util.List;
 
 import poei.presentation.bean.ArticleDto;
+import poei.service.imp.ArticleService;
 
 /**
  * @author Apprenant
@@ -46,6 +47,10 @@ public interface IArticleService {
 	 * @param id
 	 */
 	void delete(int id);
+
+	List<ArticleDto> getAllArticle();
+
+	int updateArticle(String id, ArticleService articleservice);
 	
 	
 

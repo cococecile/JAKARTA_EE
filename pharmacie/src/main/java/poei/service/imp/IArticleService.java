@@ -25,6 +25,6 @@ public interface IArticleService {
 	 * @param postDto
 	 * @return id
 	 */
-	int updateArticle(String Designation, ArticleService articleservice);
+	int updateArticle(String Designation, ArticleDto articleDto);
         
 	}
