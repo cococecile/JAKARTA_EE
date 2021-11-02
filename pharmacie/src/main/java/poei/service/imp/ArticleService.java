@@ -1,28 +1,35 @@
 package poei.service.imp;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import org.springframework.beans.factory.annotation.Autowired;
+=======
+>>>>>>> 03e41743aa076dec6761d891336bfca3dc9321a1
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD
 import poei.persistance.bean.ArticleDo;
 import poei.persistance.dao.IArticleDao;
 import poei.persistance.dao.imp.ArticleDao;
 import poei.presentation.bean.ArticleDto;
 
+=======
+import poei.presentation.bean.ArticleDto;
+import poei.service.IArticleService;
+>>>>>>> 03e41743aa076dec6761d891336bfca3dc9321a1
 
 /**
- * Classe Service de l'objet Article implémantant l'interface Sercice IArticleService
+ * Classe Service de l'objet Article implémantant l'interface Sercice
+ * IArticleService
  * 
  */
 
 @Service
-@Transactional(propagation = Propagation.REQUIRED)
 public class ArticleService implements IArticleService {
+<<<<<<< HEAD
 
 
     @Autowired
@@ -54,10 +61,29 @@ public class ArticleService implements IArticleService {
 
 	
 	private List<ArticleDto> mapToListDesArticlesDto(Object findAllArticle) {
+=======
+
+	@Override
+	public List<ArticleDto> findall() {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	public ArticleDto update(ArticleDto articleDto, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArticleDto create(ArticleDto articleDto) {
+		// TODO Auto-generated method stub
+>>>>>>> 03e41743aa076dec6761d891336bfca3dc9321a1
+		return null;
+	}
+
+	@Override
+<<<<<<< HEAD
 	public int updateArticle(String id, ArticleService articleservice) {
 		ArticleDo articleDo = articleDao.get(id);
 		articleDo.setDesignation(articleDo.getDesignation());
@@ -66,4 +92,18 @@ public class ArticleService implements IArticleService {
 		final ArticleDo updatedArticle = articleDao.save(articleDo);
 		return mapToArticleDto(updatedArticle).getId();
 	}
+=======
+	public ArticleDto getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+>>>>>>> 03e41743aa076dec6761d891336bfca3dc9321a1
 }

@@ -16,14 +16,14 @@ import poei.persistance.dao.IUserDao;
 
 
 
+
+
 @Repository
 
 public class UserDao implements IUserDao {
 
 	private SessionFactory sessionFactory;
-	
-	
-	
+
 	@Transactional
 	@Override
 	public List<UserDo> findAllUser() {
