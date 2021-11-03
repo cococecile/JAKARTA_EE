@@ -12,7 +12,6 @@ import poei.persistance.dao.imp.ArticleDao;
 import poei.presentation.bean.ArticleDto;
 import poei.service.IArticleService;
 
-
 /**
  * Classe Service de l'objet Article implémantant l'interface Sercice
  * IArticleService
@@ -22,14 +21,15 @@ import poei.service.IArticleService;
 @Service
 public class ArticleService implements IArticleService {
 
-
-    @Autowired
+	@Autowired
 	private IArticleDao articleDao;
-    
-	public ArticleService(IArticleDao articleDao) {
-		this.articleDao = articleDao;
-	}
 
+	/**
+	 * Permet de mapper un ArticleDo ==> ArticleDto
+	 * 
+	 * @param ArticleDo
+	 * @return
+	 */
 	private ArticleDto mapToArticleDto(ArticleDo ArticleDo) {
 		ArticleDto ArticleDto = new ArticleDto();
 		if (ArticleDo == null) {
@@ -40,7 +40,6 @@ public class ArticleService implements IArticleService {
 		ArticleDto.setDescription(ArticleDo.getDescription());
 		return ArticleDto;
 	}
-    
 
 	@Override
 	public List<ArticleDto> getAllArticle() {
@@ -49,21 +48,7 @@ public class ArticleService implements IArticleService {
 		return allArticles;
 	}
 
-
-	
 	private List<ArticleDto> mapToListDesArticlesDto(List<ArticleDo> findAllArticles) {
-		return null;
-	}
-
-	@Override
-	public List<ArticleDto> findall() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArticleDto update(ArticleDto articleDto, int id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -75,26 +60,31 @@ public class ArticleService implements IArticleService {
 	}
 
 	@Override
+	public ArticleDto updateArticle(ArticleDto articleDto, int id) {
 
-	public int updateArticle(String id, ArticleService articleservice) {
-		ArticleDo articleDo = articleDao.get(id);
-		articleDo.setDesignation(articleDo.getDesignation());
-		articleDo.setDescription(articleDo.getDescription());
-		articleDo.setQuantite(articleDo.getQuantite());
-		final ArticleDo updatedArticle = articleDao.save(articleDo);
-		return mapToArticleDto(updatedArticle).getId();
-	}
+		ArticleDo articleDo = articleDao.findArticleById(id);
+		if (null != articleDo) {
+			articleDo.setDesignation(articleDo.getDesignation());
+			articleDo.setDescription(articleDo.getDescription());
+			articleDo.setQuantite(articleDo.getQuantite());
+			final ArticleDo updatedArticle = articleDao.updateArticle(articleDo, id);
+			return mapToArticleDto(updatedArticle);
 
-	public ArticleDto getById(int id) {
-		// TODO Auto-generated method stub
+		}
+
 		return null;
 	}
 
 	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
+	@Override
+	public ArticleDto getById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

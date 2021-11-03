@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -12,19 +11,17 @@ import org.hibernate.query.Query;
 
 import poei.persistance.bean.ArticleDo;
 import poei.persistance.dao.IArticleDao;
-import poei.presentation.bean.ArticleDto;
 
-public class ArticleDao implements IArticleDao{
+public class ArticleDao implements IArticleDao {
 
-    private static SessionFactory sessionFactory;
-    
+	private static SessionFactory sessionFactory;
 
-    public static  List<ArticleDo> findAllArticles() {
-        try (final Session session = sessionFactory.getCurrentSession()) {
+	public static List<ArticleDo> findAllArticles() {
+		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
 			String req = "From Article";
 
-			final Query <ArticleDo> query = session.createQuery(req, ArticleDo.class);
+			final Query<ArticleDo> query = session.createQuery(req, ArticleDo.class);
 			final List<ArticleDo> listeArticleDo = query.getResultList();
 			session.flush();
 			transaction.commit();
@@ -35,11 +32,10 @@ public class ArticleDao implements IArticleDao{
 			hibernateException.printStackTrace();
 		}
 		return new ArrayList<>();
-    }
+	}
 
-
-    public ArticleDo updateArticle() {
-        try (final Session session = sessionFactory.getCurrentSession()) {
+	public ArticleDo updateArticle() {
+		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
 			String req = "From Article";
 
@@ -47,38 +43,44 @@ public class ArticleDao implements IArticleDao{
 			query.getResultList();
 			session.flush();
 			transaction.commit();
-			return new ArticleDo() ;
+			return new ArticleDo();
 
 			// On gère l'exception
 		} catch (final HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}
-		return new ArticleDo() ;
-		
-    }
+		return new ArticleDo();
 
+	}
 
 	@Override
-	public ArticleDo get(String id) {
+	public List<ArticleDo> findAllArticle() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public List<ArticleDto> getAllArticle() {
+	public ArticleDo findArticleById(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-
 	@Override
-	public ArticleDo save(ArticleDo articleDo) {
+	public ArticleDo createArticle(ArticleDo article) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-    }
 
+	@Override
+	public ArticleDo updateArticle(ArticleDo articleDo, int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
 
-    
+	}
+
+}

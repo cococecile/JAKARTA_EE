@@ -3,44 +3,30 @@ package poei.presentation.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
 @Controller
 
+@RequestMapping("/userDto")
 public class UserController {
 
 	@Autowired
 	private IUserService userService;
 
-	public UserController() {
-		// Empty method
-	}
-	
-	 @RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
-	    public String index(Model model) {
-
-	        String message = "GESTION DES ARTICLES DE LA PHARMACIE";
-
-	        model.addAttribute("message", message);
-
-	        return "index";
-	    }
-	
-	 @RequestMapping(value = { "/usersList" }, method = RequestMethod.GET)
-	public String findAllUser(Model model) {
+	// Show All User
+	@GetMapping("/users")
+	public ModelAndView showAllEmployees() {
+		System.out.println(this.getClass().getSimpleName() + ":=======>Showing users list.");
+		ModelAndView mav = new ModelAndView("usersList"); // Here employees is a jsp page name
 		List<UserDto> users = userService.findAll();
-		
-		model.addAttribute("users", users);
-		
-		return "usersList";
-		
+		mav.addObject("users", users); // Set the attribute as "users"
+		return mav;
 	}
 
 }

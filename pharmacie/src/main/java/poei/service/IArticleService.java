@@ -16,15 +16,14 @@ public interface IArticleService {
 	 * 
 	 * @return articlesListe
 	 */
-	List<ArticleDto> findall();
-
+	List<ArticleDto> getAllArticle();
 	/**
 	 * Permet de mettre à jour un article
 	 * 
 	 * @param articleDto, id
 	 * @return
 	 */
-	ArticleDto update(ArticleDto articleDto, int id);
+	ArticleDto updateArticle(final ArticleDto articleDto, final int id);
 	
 	/**
 	 * Permet de creer un article
@@ -48,9 +47,9 @@ public interface IArticleService {
 	 */
 	void delete(int id);
 
-	List<ArticleDto> getAllArticle();
+	
 
-	int updateArticle(String id, ArticleService articleservice);
+	
 	
 	
 
