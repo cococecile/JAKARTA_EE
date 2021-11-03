@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+	"-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- La connection -->
+		<property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/App_pharma</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+		<property name="hibernate.connection.username">postgres</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.current_session_context_class>">thread</property>
+
+		<!-- Configuration hibernate -->
+		<!--<property name="hibernate.connection.autocommit">true</property> -->
+		<property name="hibernate.hbm2ddl.auto">create</property>
+
+		<!-- Permet de voir les requêtes exécutées par hibernate -->
+		<property name="hibernate.show_sql">true</property>
+
+		<!-- Permet de formatter les requêtes executées par hibernate -->
+		<!-- <property name="format_sql>true</property> -->
+		
+		<!-- Liste des fichiers de Mapping hbm pour chaque table / Do par domaine -->
+		<!-- hbm domaine UserDo -->
+		<mapping resource="src/main/resources/hbm/User.hbm.xml" />
+		
+		<!-- hbm domaine ArticleDo -->
+		<mapping resource="src/main/resources/hbm/ArticleDo.hbm.xml" />
+		
+		
+	</session-factory>
+</hibernate-configuration>

@@ -8,10 +8,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 
 import poei.persistance.bean.ArticleDo;
 import poei.persistance.dao.IArticleDao;
 
+@Service
 public class ArticleDao implements IArticleDao {
 
 	private static SessionFactory sessionFactory;
