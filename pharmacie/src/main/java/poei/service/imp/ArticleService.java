@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import poei.persistance.bean.ArticleDo;
 import poei.persistance.dao.IArticleDao;
-import poei.persistance.dao.imp.ArticleDao;
 import poei.presentation.bean.ArticleDto;
 import poei.service.IArticleService;
 
@@ -28,28 +27,57 @@ public class ArticleService implements IArticleService {
 	 * Permet de mapper un ArticleDo ==> ArticleDto
 	 * 
 	 * @param ArticleDo
-	 * @return
+	 * @return articleDto
 	 */
-	private ArticleDto mapToArticleDto(ArticleDo ArticleDo) {
-		ArticleDto ArticleDto = new ArticleDto();
+	public ArticleDto mapToArticleDto(ArticleDo ArticleDo) {
+		ArticleDto articleDto = new ArticleDto();
 		if (ArticleDo == null) {
 			return null;
 		}
-		ArticleDto.setId(ArticleDo.getId());
-		ArticleDto.setDesignation(ArticleDo.getDesignation());
-		ArticleDto.setDescription(ArticleDo.getDescription());
-		return ArticleDto;
+		articleDto.setId(ArticleDo.getId());
+		articleDto.setDesignation(ArticleDo.getDesignation());
+		articleDto.setDescription(ArticleDo.getDescription());
+		return articleDto;
+	}
+
+	/**
+	 * Permet de mapper un ArticleDto ==> ArticleDo
+	 * 
+	 * @param articleDto
+	 * @return articleDo
+	 */
+	public ArticleDo mapToArticleDto(ArticleDto articleDto) {
+		ArticleDo articleDo = new ArticleDo();
+		if (articleDto == null) {
+			return null;
+		}
+		articleDo.setId(articleDto.getId());
+		articleDo.setDesignation(articleDto.getDesignation());
+		articleDo.setDescription(articleDto.getDescription());
+		return articleDo;
+	}
+
+	/**
+	 * Permet de mapper une listeArticleDo ==> listeArticleDto
+	 * 
+	 * @param listeArticleDo
+	 * @return listeArticleDto
+	 */
+	public List<ArticleDto> mapToListDesArticlesDto(List<ArticleDo> listeArticleDo) {
+
+		List<ArticleDto> listeArticleDto = new ArrayList<ArticleDto>();
+		for (ArticleDo articleDo : listeArticleDo) {
+			listeArticleDto.add(mapToArticleDto(articleDo));
+
+		}
+		return listeArticleDto;
 	}
 
 	@Override
 	public List<ArticleDto> getAllArticle() {
 		List<ArticleDto> allArticles = new ArrayList<ArticleDto>();
-		allArticles = mapToListDesArticlesDto(ArticleDao.findAllArticles());
+		allArticles = mapToListDesArticlesDto(articleDao.findAllArticle());
 		return allArticles;
-	}
-
-	private List<ArticleDto> mapToListDesArticlesDto(List<ArticleDo> findAllArticles) {
-		return null;
 	}
 
 	@Override
