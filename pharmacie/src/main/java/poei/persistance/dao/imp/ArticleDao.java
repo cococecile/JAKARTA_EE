@@ -40,6 +40,9 @@ public class ArticleDao implements IArticleDao {
 		return new ArrayList<>();
 	}
 
+	/**
+	 * @override est utilisé pour définir une méthode qui est héritée de la classe parente 
+	 */
 	@Override
 	public ArticleDo findArticleById(int id) {
 		try(final Session session = sessionFactory.getCurrentSession()) {
@@ -68,7 +71,6 @@ public class ArticleDao implements IArticleDao {
 		return null;
 	}
 
-
 	@Override
 	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
@@ -87,8 +89,6 @@ public class ArticleDao implements IArticleDao {
 		}
 		return new ArticleDo();
 	}
-
-	
 	
 	@Override
 	public boolean deleteArticle(final int id) {
@@ -118,6 +118,5 @@ public class ArticleDao implements IArticleDao {
 		}
 		return false;
 	}
-
 
 }
