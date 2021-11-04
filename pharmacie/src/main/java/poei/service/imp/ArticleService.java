@@ -94,13 +94,14 @@ public class ArticleService implements IArticleService {
 	@Override
 	public ArticleDto getById(int id) {
 		// on va récupérer l'id dans une variable
-		final ArticleDto ArticleDto = getById(id);
-		if (ArticleDto == null){
+		final ArticleDto articleDto = mapToArticleDto(articleDao.findArticleById(id));
+		
+		if (articleDto == null){
 			return null;
 		}
-		else{
-			return ArticleDto;
-		}
+		
+			return articleDto;
+		
 	}
 
 }

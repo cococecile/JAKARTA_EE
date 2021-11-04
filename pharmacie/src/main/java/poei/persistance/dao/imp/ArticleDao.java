@@ -2,6 +2,7 @@ package poei.persistance.dao.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -12,7 +13,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Service;
 
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
+
 import poei.persistance.bean.ArticleDo;
 import poei.persistance.dao.IArticleDao;
 
@@ -44,14 +45,14 @@ public class ArticleDao implements IArticleDao {
 	 * @override est utilisé pour définir une méthode qui est héritée de la classe parente 
 	 */
 	@Override
-	public ArticleDo findArticleById(int id) {
+	public ArticleDo findArticleById(final int id) {
 		try(final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
 			final Query<ArticleDo> query= session.createQuery("From ArticleDo where id = :idParam", ArticleDo.class);
 			// on initialise le paramètre
 			query.setParameter("idParam", id);
 			// regarder la Javadoc de Optional 
-			final java.util.Optional<ArticleDo> articleDo = query.uniqueResultOptional();
+			final Optional<ArticleDo> articleDo = query.uniqueResultOptional();
 
 			session.flush();
 			transaction.commit();
@@ -59,10 +60,9 @@ public class ArticleDao implements IArticleDao {
 			return articleDo.orElse(null);
 		}catch(final HibernateException hibernateException){
 			// on peut catcher des HibernateException 
-			hibernateException.printStackTrace();
-			return null;
+			hibernateException.printStackTrace();	
 		}
-		// return null; écrase l'article ?
+		return null;
 	}
 
 	@Override
