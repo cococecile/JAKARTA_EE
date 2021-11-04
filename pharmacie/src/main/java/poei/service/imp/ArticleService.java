@@ -44,7 +44,7 @@ public class ArticleService implements IArticleService {
 	@Override
 	public List<ArticleDto> getAllArticle() {
 		List<ArticleDto> allArticles = new ArrayList<ArticleDto>();
-		allArticles = mapToListDesArticlesDto(ArticleDao.findAllArticles());
+		allArticles = mapToListDesArticlesDto(articleDao.findAllArticle());
 		return allArticles;
 	}
 
@@ -76,15 +76,31 @@ public class ArticleService implements IArticleService {
 	}
 
 	@Override
-	public void delete(int id) {
-		// TODO Auto-generated method stub
+	public boolean deleteArticle(final int id) {
+		// on va récupérer l'article par l'id dans une variable
+		final ArticleDto articleDto = getById(id);
+		// si l'article n'est pas vide alors
+		if (articleDto != null) {
+			// le résultat selon le statut de l'article sera de supprimer l'article ciblé par l'id au DAO.
+			boolean result = articleDao.deleteArticle(id);
+			// retourner le résultat ( supprimer )
+			return result;
+		}
+		// ou rien // 
+		return false;
 
 	}
 
 	@Override
 	public ArticleDto getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		// on va récupérer l'id dans une variable
+		final ArticleDto ArticleDto = getById(id);
+		if (ArticleDto == null){
+			return null;
+		}
+		else{
+			return ArticleDto;
+		}
 	}
 
 }

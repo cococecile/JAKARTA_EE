@@ -42,28 +42,14 @@ public interface IArticleService {
 	
 	/**
 	 * Permet de supprimer un article à partie de son id
+	 *récupère le DAO de persistance pour effacer l'article si résult //
+	 * boolean ArticleDto soit article soit pas article //
+	 * final: nous n'allons pas modifier 
+	 * supprimer par l'id
 	 * 
 	 * @param id
 	 */
-	@Override
-	// récupère le DAO de persistance pour effacer l'article si résult //
-	// boolean ArticleDto soit article soit pas article //
-	// final: nous n'allons pas modifier 
-	// supprimer par l'id
-
-	public boolean delete(final int id) {
-		// on va récupérer l'article par l'id dans une variable
-		final ArticleDto articleDto = getById(id);
-		// si l'article n'est pas vide alors
-		if (articleDto != null) {
-			// le résultat selon le statut de l'article sera de supprimer l'article ciblé par l'id au DAO.
-			boolean result = articleDao.delete(id);
-			// retourner le résultat ( supprimer )
-			return result;
-		}
-		// ou rien // 
-		return false;
-	}
+	boolean deleteArticle(final int id);
 
 
 	

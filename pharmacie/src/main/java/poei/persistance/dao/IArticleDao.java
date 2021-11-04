@@ -45,32 +45,6 @@ public interface IArticleDao {
 	 * Permet de supprimer un article à partir de son id
 	 * @param id
 	 */
-	@Override
-		public boolean deleteArticleDo(final int idArticleDo) {
-			try (final Session session = sessionFactory.currentSession()) {
-				//sans auto-commit, on doit créer une transaction
-				final Transaction transaction = session.beginTransaction();
-
-				//delete avec query 
-				final Query<?> query = session.createQuery("delete from ArticleDo where id = :idArticleDo");
-				query.setParameter("idArticleDo", id);
-				final int result = query.executeUpdate();
-
-				//delete sans query
-				//				final ArticleDo articleDo = session.load(ArticleDo.class, idArticleDo);
-				//				session.delete(articleDo);
-
-				session.flush();
-				transaction.commit();
-				
-				return int result;
-
-				}catch (final HibernateException | EntityNotFoundException exception){
-				// on peut catcher des HibernateExceptin ou des EntityNotFoundException pour le session.delete
-				exception.printStackTrace();
-			}
-			return false;
-		}
-
+	boolean deleteArticle(final int id);
 	
 }
