@@ -16,7 +16,7 @@ import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
 @Controller
-@RequestMapping("/connexion")
+@RequestMapping("/")
 public class LoginController {
 
 	@Autowired

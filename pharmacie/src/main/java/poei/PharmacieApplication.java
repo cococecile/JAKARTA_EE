@@ -18,13 +18,18 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @SpringBootApplication
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 @EnableAutoConfiguration(exclude = { //
 		DataSourceAutoConfiguration.class, //
 		DataSourceTransactionManagerAutoConfiguration.class, //
 		HibernateJpaAutoConfiguration.class })
-public class PharmacieApplication {
+public class PharmacieApplication extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private Environment env;
