@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
 @Controller
-@RequestMapping("/connexion")
 public class LoginController {
 
 	@Autowired
@@ -24,7 +24,7 @@ public class LoginController {
 	
 
 	// Show Home Page
-	@GetMapping(value = { "/", "/home", "/welcome", "default" })
+	@GetMapping({"/", "/welcome"})
 	public ModelAndView showHomePage() {
 		System.out.println(this.getClass().getSimpleName() + ":=======>Showing Home Page.");
 		return new ModelAndView("welcome"); // Here welcome is a jsp page name
