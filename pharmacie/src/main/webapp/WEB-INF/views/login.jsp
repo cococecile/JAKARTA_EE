@@ -30,18 +30,18 @@
 						<img src="/images/signin-image.jpg" alt="sing up image">
 					</figure>
 					<div style="display: flex; justify-content: space-between;">
-						<a href="${pageContext.request.contextPath}/employee/sign-up"
+						<a href="subscribe"
 							class="signup-image-link">Create an account</a> <a
-							href="${pageContext.request.contextPath}/employee/home"
+							href="welcome"
 							class="signup-image-link">Go Home</a>
 					</div>
-					<spring:url value="/employee/validateEmployee" var="sign-in-URL" />
+					<spring:url value="/user/validateUser" var="sign-in-URL" />
 				</div>
 
 				<div class="signin-form">
-					<h3 class="form-title">Employee Sign-In Form</h3>
-					<form:form modelAttribute="employee-sign-in"
-						action="/employee/validateEmployee" method="POST"
+					<h3 class="form-title">User Sign-In Form</h3>
+					<form:form modelAttribute="user-sign-in"
+						action="/user/validateUser" method="POST"
 						cssClass="register-form" id="login-form">
 						<div class="form-group">
 							<label for="email"><i class="zmdi zmdi-email"></i></label>
@@ -50,10 +50,10 @@
 							<form:errors path="email" cssStyle="color:red;" cssClass="error" />
 						</div>
 						<div class="form-group">
-							<label for="password"><i class="zmdi zmdi-lock"></i></label>
-							<form:password path="password" name="pass" id="pass"
-								placeholder="Password" required="required" />
-							<form:errors path="password" cssStyle="color:red;"
+							<label for="mot_de_passe"><i class="zmdi zmdi-lock"></i></label>
+							<form:password path="mot_de_passe" name="pass" id="pass"
+								placeholder="mot_de_passe" required="required" />
+							<form:errors path="mot_de_passe" cssStyle="color:red;"
 								cssClass="error" />
 						</div>
 						<div class="form-group">
@@ -74,7 +74,6 @@
 
 
 	<!-- JS -->
-	<script src="/vendor/jquery/jquery.min.js"></script>
-	<script src="/js/main.js"></script>
+	
 </body>
 </html>
