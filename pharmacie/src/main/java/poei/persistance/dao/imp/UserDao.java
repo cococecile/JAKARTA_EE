@@ -34,6 +34,7 @@ public class UserDao implements IUserDao {
 			final List<UserDo> listeUserDo = query.getResultList();
 			session.flush();
 			transaction.commit();
+			
 			return listeUserDo;
 
 			// On gère l'exception
@@ -109,20 +110,20 @@ public class UserDao implements IUserDao {
 			final Transaction transaction = session.beginTransaction();
 			final StringBuilder hqlQuery = new StringBuilder();
 			hqlQuery.append(
-					"update UserDo set nom = :nom, prenom = :prenom, dateNaissance = :dateNaissance, password = :password, adresse = :adresse, mail = :mail, profilDo = :profilDo where id = :id");
+					"update UserDo set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where id = :id");
 
 			final Query<?> query = session.createQuery(hqlQuery.toString());
 			// intialisation des paramètres
-			query.setParameter("id", id);
 			query.setParameter("nom", userDo.getNom());
 			query.setParameter("prenom", userDo.getPrenom());
-			query.setParameter("mot_de_passe", userDo.getMot_de_passe());
 			query.setParameter("adresse", userDo.getAdresse());
+			query.setParameter("email", userDo.getEmail());
+			query.setParameter("mot_de_passe", userDo.getMot_de_passe());
 			query.executeUpdate();
 
 			session.flush();
-
 			transaction.commit();
+			
 			// on "complète" le Do à retourner
 			userDo.setId(id);
 			return userDo;

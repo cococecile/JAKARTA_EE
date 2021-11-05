@@ -16,9 +16,10 @@ import poei.persistance.dao.IArticleDao;
 @Service
 public class ArticleDao implements IArticleDao {
 
-	private static SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-	public static List<ArticleDo> findAllArticles() {
+	@Override
+	public List<ArticleDo> findAllArticle() {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
 			String req = "From Article";
@@ -36,13 +37,44 @@ public class ArticleDao implements IArticleDao {
 		return new ArrayList<>();
 	}
 
-	public ArticleDo updateArticle() {
+	@Override
+	public ArticleDo findArticleById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArticleDo createArticle(final ArticleDo article) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
-			String req = "From Article";
 
-			final Query<ArticleDo> query = session.createQuery(req, ArticleDo.class);
-			query.getResultList();
+			session.save(article);
+
+			session.flush();
+			transaction.commit();
+			
+			return article;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	@Override
+	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {
+		try (final Session session = sessionFactory.getCurrentSession()) {
+			final Transaction transaction = session.beginTransaction();
+
+			final StringBuilder hqlQuery = new StringBuilder();
+			hqlQuery.append(
+					"update ArticleDo set designation = :designation, description = :description where id = :id");
+
+			final Query<?> query = session.createQuery(hqlQuery.toString());
+			// initialisation des paramètres
+			query.setParameter("designation", articleDo.getDesignation());
+			query.setParameter("description", articleDo.getDescription());
+			articleDo.setId(id);
+
 			session.flush();
 			transaction.commit();
 			return new ArticleDo();
@@ -51,32 +83,8 @@ public class ArticleDao implements IArticleDao {
 		} catch (final HibernateException hibernateException) {
 			hibernateException.printStackTrace();
 		}
-		return new ArticleDo();
-
-	}
-
-	@Override
-	public List<ArticleDo> findAllArticle() {
-		// TODO Auto-generated method stub
 		return null;
-	}
 
-	@Override
-	public ArticleDo findArticleById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArticleDo createArticle(ArticleDo article) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArticleDo updateArticle(ArticleDo articleDo, int id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
