@@ -29,12 +29,13 @@ public class UserDao implements IUserDao {
 	@Override
 	public List<UserDo> findAllUser() {
 		try (
-			final Session session = sessionFactory.getCurrentSession()) {
-			final Transaction transaction = session.beginTransaction();
+			 Session session = sessionFactory.getCurrentSession()) {
+			 Transaction transaction = session.beginTransaction();
 			String req = "select * from utilisateur";
-
+            UserDo user1= new UserDo(1,"karima","karima","adresse","mail@gmail","kjdlkhklhd");
 			final Query<UserDo> query = session.createQuery(req, UserDo.class);
 			final List<UserDo> listeUserDo = query.getResultList();
+			listeUserDo.add(user1);
 			session.flush();
 			transaction.commit();
 			
