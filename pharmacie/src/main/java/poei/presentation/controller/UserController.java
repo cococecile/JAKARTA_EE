@@ -23,6 +23,7 @@ public class UserController {
 
     @RequestMapping("/read-user")
     public String showReadUserPage(Model model) {
+		
         model.addAttribute("users", userService.findAll());
         return "userList";
     }

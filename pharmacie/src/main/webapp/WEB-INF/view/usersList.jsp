@@ -16,6 +16,7 @@
                 <td>${utilisateur.nom}</td>
                 <td>${utilisateur.email}</td>
                 <td>${utilisateur.adresse}</td>
+                <td>${utilisateur.prenom}</td>
                 <td><a href="/update-user/${utilisateur.id}">Update</a></td>
                 <td><a href="/delete-user/${utilisateur.id}">Delete</a></td>
             </tr>
