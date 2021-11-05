@@ -13,7 +13,6 @@ import poei.service.IUserService;
 
 @Controller
 
-@RequestMapping("/userDto")
 public class UserController {
 
 	@Autowired
