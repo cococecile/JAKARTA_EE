@@ -66,7 +66,8 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<UserDto> findAll() {
-		final List<UserDto> liste = mapToListDto(userDao.findAllUser());
+		final List<UserDo> users = userDao.findAllUser();
+		final List<UserDto> liste = mapToListDto(users);
 
 		return liste;
 	}

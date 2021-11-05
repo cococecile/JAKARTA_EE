@@ -1,11 +1,9 @@
 package poei.persistance.dao.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -23,29 +21,27 @@ import poei.persistance.dao.IUserDao;
 @Transactional
 public class UserDao implements IUserDao {
 
-
+	@Autowired
 	private SessionFactory sessionFactory;
+
+	public UserDao() {
+		// Empty method
+	}
 
 	@Override
 	public List<UserDo> findAllUser() {
-		try (
-			 Session session = sessionFactory.getCurrentSession()) {
-			 Transaction transaction = session.beginTransaction();
-			String req = "select * from utilisateur";
-  
-			final Query<UserDo> query = session.createQuery(req, UserDo.class);
-			final List<UserDo> listeUserDo = query.getResultList();
-		
-			session.flush();
-			transaction.commit();
-			
-			return listeUserDo;
+		String req = "From UserDo";
+		Session session = this.sessionFactory.getCurrentSession();
 
-			// On gère l'exception
-		} catch (final HibernateException hibernateException) {
-			hibernateException.printStackTrace();
-		}
-		return new ArrayList<>();
+		final Query<UserDo> query = session.createQuery(req, UserDo.class);
+		final List<UserDo> listeUserDo = query.getResultList();
+
+		session.flush();
+
+		return listeUserDo;
+
+		
+
 	}
 
 	@Override
@@ -71,8 +67,8 @@ public class UserDao implements IUserDao {
 	public UserDo findConnectedUSer(final String email, final String mot_de_passe) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
-			final Query<UserDo> query = session
-					.createQuery("select From utilisateur where email = :email and mot_de_passe = :mot_de_passe", UserDo.class);
+			final Query<UserDo> query = session.createQuery(
+					"select From utilisateur where email = :email and mot_de_passe = :mot_de_passe", UserDo.class);
 			// on initialise le paramètre
 			query.setParameter("email", email);
 			query.setParameter("mot_de_passe", mot_de_passe);
@@ -127,7 +123,7 @@ public class UserDao implements IUserDao {
 
 			session.flush();
 			transaction.commit();
-			
+
 			// on "complète" le Do à retourner
 			userDo.setId(id);
 			return userDo;

@@ -1,5 +1,7 @@
 package poei.presentation.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,20 +13,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import poei.presentation.bean.UserDto;
-import poei.service.imp.UserService;
+import poei.service.IUserService;
 
 @Controller
 public class UserController {
 	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
-	UserService userService;
+	IUserService userService;
 
 	@RequestMapping("/read-user")
 	public String showReadUserPage(Model model) {
+		List<UserDto> users = userService.findAll();
 
-		model.addAttribute("users", userService.findAll());
-		return "userList";
+		model.addAttribute("users", users );
+		return "usersList";
 	}
 
 	@RequestMapping("/create-user")
