@@ -12,30 +12,31 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+
 @EnableAutoConfiguration(exclude = { //
 		DataSourceAutoConfiguration.class, //
 		DataSourceTransactionManagerAutoConfiguration.class, //
 		HibernateJpaAutoConfiguration.class })
-public class PharmacieApplication extends WebSecurityConfigurerAdapter {
+public class PharmacieApplication extends SpringBootServletInitializer {
 
 	@Autowired
 	private Environment env;
 
-	@Autowired
-	private ResourceLoader rl;
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+
+		return builder.sources(SpringApplicationBuilder.class);
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(PharmacieApplication.class, args);
@@ -92,4 +93,5 @@ public class PharmacieApplication extends WebSecurityConfigurerAdapter {
 		return transactionManager;
 	}
 
+	
 }

@@ -31,9 +31,9 @@
 				<br>
 				<br>
 				<div style="display: flex; justify-content: space-between;">
-					<a href="${pageContext.request.contextPath}/user/home" class="signup-image-link">Home</a> 
+					<a href="${pageContext.request.contextPath}/user/login" class="signup-image-link">Login</a> 
 <%-- 					<a href="${pageContext.request.contextPath}/user/updateUser/${user.id}" class="signup-image-link">Update Profile</a> --%>
-					<a href="${pageContext.request.contextPath}/user/users" class="signup-image-link">View Employees</a>
+					<a href="${pageContext.request.contextPath}/user/articles" class="signup-image-link">View Articles</a>
 					<a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
 				</div>
 			</div>
