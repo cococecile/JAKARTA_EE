@@ -42,7 +42,7 @@ public class ArticleService implements IArticleService {
 	}
 
 	@Override
-	public List<ArticleDto> getAllArticle() {
+	public static List<ArticleDto> getAllArticle() {
 		List<ArticleDto> allArticles = new ArrayList<ArticleDto>();
 		allArticles = mapToListDesArticlesDto(ArticleDao.findAllArticles());
 		return allArticles;
