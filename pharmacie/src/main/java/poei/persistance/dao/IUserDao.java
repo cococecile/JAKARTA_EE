@@ -3,7 +3,6 @@ package poei.persistance.dao;
 import java.util.List;
 
 import poei.persistance.bean.UserDo;
-import poei.presentation.bean.UserDto;
 
 public interface IUserDao {
 
