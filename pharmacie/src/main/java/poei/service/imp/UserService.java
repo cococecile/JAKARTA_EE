@@ -24,9 +24,9 @@ public class UserService implements IUserService {
 	 * permet de mapper un userDo en userDto
 	 * 
 	 * @param user
-	 * @return un userDto
+	 * @return userDto
 	 */
-	public static UserDto mapToDto(final UserDo user) {
+	public UserDto mapToDto(final UserDo user) {
 		final UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
 		userDto.setNom(user.getNom());
@@ -41,9 +41,9 @@ public class UserService implements IUserService {
 	 * permet de mapper une liste de userDo en liste de userDto
 	 * 
 	 * @param listeUserDo
-	 * @return
+	 * @return listeUserDto
 	 */
-	public static List<UserDto> mapToListDto(final List<UserDo> listeUserDo) {
+	public List<UserDto> mapToListDto(final List<UserDo> listeUserDo) {
 		final List<UserDto> listeUserDto = new ArrayList<>();
 		for (final UserDo userDo : listeUserDo) {
 			listeUserDto.add(mapToDto(userDo));
@@ -57,7 +57,7 @@ public class UserService implements IUserService {
 	 * @param userDto
 	 * @return le userDo
 	 */
-	public static UserDo mapToDo(final UserDto userDto) {
+	public UserDo mapToDo(final UserDto userDto) {
 		final String newPassword = MD5Encryption.encrypt(userDto.getMot_de_passe());
 		final UserDo userDo = UserDo.buildUserDo(userDto.getId(), userDto.getNom(), userDto.getPrenom(),
 				userDto.getAdresse(), newPassword, userDto.getEmail());

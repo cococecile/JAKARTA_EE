@@ -20,7 +20,7 @@ import poei.persistance.dao.IArticleDao;
 @Service
 public class ArticleDao implements IArticleDao {
 
-	private static SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
 	@Override
 	public List<ArticleDo> findAllArticle() {
@@ -66,26 +66,18 @@ public class ArticleDao implements IArticleDao {
 	}
 
 	@Override
-	public ArticleDo createArticle(ArticleDo article) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {
+	public ArticleDo createArticle(final ArticleDo article) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
-			String req = "From Article";
 
-			final Query<ArticleDo> query = session.createQuery(req, ArticleDo.class);
-			query.getResultList();
+			session.save(article);
+
 			session.flush();
 			transaction.commit();
-			return new ArticleDo();
-
-			// On gère l'exception
-		} catch (final HibernateException hibernateException) {
-			hibernateException.printStackTrace();
+			
+			return article;
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return new ArticleDo();
 	}
@@ -100,23 +92,48 @@ public class ArticleDao implements IArticleDao {
 			final Query<?> query = session.createQuery("delete from ArticleDo where id = :idArticleDo");
 			query.setParameter("idArticleDo", id);
 			final int result = query.executeUpdate();
-
 			//delete sans query
-			//				final ArticleDo articleDo = session.load(ArticleDo.class, idArticleDo);
-			//				session.delete(articleDo);
+				//				final ArticleDo articleDo = session.load(ArticleDo.class, idArticleDo);
+				//				session.delete(articleDo);
+
+				session.flush();
+				transaction.commit();
+				
+				if (result ==1 ) {
+					return true;
+				}
+
+				}catch (final HibernateException | EntityNotFoundException exception){
+				// on peut catcher des HibernateExceptin ou des EntityNotFoundException pour le session.delete
+				exception.printStackTrace();
+			}
+			return false;
+	}
+
+	@Override
+	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {
+		try (final Session session = sessionFactory.getCurrentSession()) {
+			final Transaction transaction = session.beginTransaction();
+
+			final StringBuilder hqlQuery = new StringBuilder();
+			hqlQuery.append(
+					"update ArticleDo set designation = :designation, description = :description where id = :id");
+
+			final Query<?> query = session.createQuery(hqlQuery.toString());
+			// initialisation des paramètres
+			query.setParameter("designation", articleDo.getDesignation());
+			query.setParameter("description", articleDo.getDescription());
+			articleDo.setId(id);
 
 			session.flush();
 			transaction.commit();
-			
-			if (result ==1 ) {
-				return true;
-			}
+			return new ArticleDo();
 
-			}catch (final HibernateException | EntityNotFoundException exception){
-			// on peut catcher des HibernateExceptin ou des EntityNotFoundException pour le session.delete
-			exception.printStackTrace();
+			// On gère l'exception
+		} catch (final HibernateException hibernateException) {
+			hibernateException.printStackTrace();
 		}
-		return false;
-	}
+		return null;
 
+	}
 }
