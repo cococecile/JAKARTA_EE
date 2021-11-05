@@ -1,14 +1,8 @@
 package poei.presentation.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.UserDto;
@@ -21,7 +15,7 @@ public class LoginController {
 	private IUserService userService;
 
 	// Show Home Page
-	@GetMapping({"/", "/welcome"})
+	@GetMapping({ "/", "/welcome" })
 	public ModelAndView showHomePage() {
 		System.out.println(this.getClass().getSimpleName() + ":=======>Showing Home Page.");
 		return new ModelAndView("welcome"); // Here welcome is a jsp page name
@@ -45,27 +39,4 @@ public class LoginController {
 		return mav;
 	}
 
-	// Show welcome page after successful login
-	@GetMapping("/welcome")
-	public ModelAndView welcomeMessage() {
-		System.out.println(this.getClass().getSimpleName() + ":=======>Showing Welcome Page.");
-		return new ModelAndView("welcome"); // Here welcome is a jsp page name
-	}
-
-	// Validate User through login Process
-	@PostMapping("/validateUser")
-	public ModelAndView validateEmployee(@Validated @ModelAttribute("user-sign-in") UserDto userDto, BindingResult bindingResult,
-			HttpSession session) {
-
-		UserDto userExist = userService.findUserForConnexion(userDto.getEmail(), userDto.getMot_de_passe());
-		// Check if user exists
-		if (userExist == null) {
-			bindingResult.rejectValue("email", "error.user", "Identifiant n'existe pas! Mersi de créer un compte");
-			return new ModelAndView("userCreate");
-		} else {
-			session.setAttribute("prenom", userExist.getPrenom() + " " + userExist.getNom());
-			return new ModelAndView("welcome");
-
-		}
-	}
 }
