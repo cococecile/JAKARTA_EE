@@ -46,7 +46,7 @@ public class ArticleService implements IArticleService {
 	 * @param articleDto
 	 * @return articleDo
 	 */
-	public ArticleDo mapToArticleDto(ArticleDto articleDto) {
+	public ArticleDo mapToArticleDo(ArticleDto articleDto) {
 		ArticleDo articleDo = new ArticleDo();
 		if (articleDto == null) {
 			return null;
@@ -81,10 +81,15 @@ public class ArticleService implements IArticleService {
 	}
 
 	@Override
-	public ArticleDto create(ArticleDto articleDto) {
-		// TODO Auto-generated method stub
+	public ArticleDto create(final ArticleDto articleDto) {
+		final ArticleDto newArticle = mapToArticleDto(articleDao.createArticle(mapToArticleDo(articleDto)));
+		if (null != newArticle) {
+			return newArticle;
 
-		return null;
+		}
+
+		return new ArticleDto();
+
 	}
 
 	@Override
@@ -97,7 +102,6 @@ public class ArticleService implements IArticleService {
 			articleDo.setQuantite(articleDo.getQuantite());
 			final ArticleDo updatedArticle = articleDao.updateArticle(articleDo, id);
 			return mapToArticleDto(updatedArticle);
-
 		}
 
 		return null;
