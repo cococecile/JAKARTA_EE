@@ -19,10 +19,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
-
 @EnableAutoConfiguration(exclude = { //
 		DataSourceAutoConfiguration.class, //
 		DataSourceTransactionManagerAutoConfiguration.class, //
@@ -93,5 +91,4 @@ public class PharmacieApplication extends SpringBootServletInitializer {
 		return transactionManager;
 	}
 
-	
 }
