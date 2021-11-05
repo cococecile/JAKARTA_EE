@@ -5,12 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.PersistenceContext;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,17 +20,18 @@ import poei.persistance.bean.UserDo;
 import poei.persistance.dao.IUserDao;
 
 @Repository
-
 @Transactional
 public class UserDao implements IUserDao {
+
 
 	private SessionFactory sessionFactory;
 
 	@Override
 	public List<UserDo> findAllUser() {
-		try (final Session session = sessionFactory.getCurrentSession()) {
+		try (
+			final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
-			String req = "From User";
+			String req = "select * from utilisateur";
 
 			final Query<UserDo> query = session.createQuery(req, UserDo.class);
 			final List<UserDo> listeUserDo = query.getResultList();
@@ -48,7 +51,7 @@ public class UserDao implements IUserDao {
 	public UserDo findUser(final int id) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
-			final Query<UserDo> query = session.createQuery("From UserDo where id = :id", UserDo.class);
+			final Query<UserDo> query = session.createQuery("select from utilisateur where id = :id", UserDo.class);
 			// on initialise le paramètre
 			query.setParameter("id", id);
 			// regarder la Javadoc de Optional
@@ -68,7 +71,7 @@ public class UserDao implements IUserDao {
 		try (final Session session = sessionFactory.getCurrentSession()) {
 			final Transaction transaction = session.beginTransaction();
 			final Query<UserDo> query = session
-					.createQuery("From UserDo where email = :email and mot_de_passe = :mot_de_passe", UserDo.class);
+					.createQuery("select From utilisateur where email = :email and mot_de_passe = :mot_de_passe", UserDo.class);
 			// on initialise le paramètre
 			query.setParameter("email", email);
 			query.setParameter("mot_de_passe", mot_de_passe);
@@ -110,7 +113,7 @@ public class UserDao implements IUserDao {
 			final Transaction transaction = session.beginTransaction();
 			final StringBuilder hqlQuery = new StringBuilder();
 			hqlQuery.append(
-					"update UserDo set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where id = :id");
+					"update utilisateur set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where id = :id");
 
 			final Query<?> query = session.createQuery(hqlQuery.toString());
 			// intialisation des paramètres

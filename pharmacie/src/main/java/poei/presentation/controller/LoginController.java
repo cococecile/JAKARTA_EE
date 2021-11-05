@@ -24,7 +24,7 @@ public class LoginController {
 	
 
 	// Show Home Page
-	@GetMapping(value = { "/", "/home", "/index", "default" })
+	@GetMapping(value = { "/", "/home", "/welcome", "default" })
 	public ModelAndView showHomePage() {
 		System.out.println(this.getClass().getSimpleName() + ":=======>Showing Home Page.");
 		return new ModelAndView("welcome"); // Here welcome is a jsp page name
