@@ -33,6 +33,16 @@ public class UserDo {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public UserDo(Integer id, String nom, String prenom, String adresse, String email, String mot_de_passe) {
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.email = email;
+		this.mot_de_passe = mot_de_passe;
+	}
+
 	public Integer getId() {
 		return id;
 	}

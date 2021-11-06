@@ -3,7 +3,6 @@ package poei.service;
 import java.util.List;
 
 import poei.presentation.bean.ArticleDto;
-import poei.service.imp.ArticleService;
 
 /**
  * @author Apprenant

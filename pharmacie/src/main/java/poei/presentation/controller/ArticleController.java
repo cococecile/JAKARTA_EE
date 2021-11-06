@@ -19,19 +19,24 @@ public class ArticleController {
 	  @Autowired
 	    ArticleService articleService;
 	  
-	  @Autowired
-	    private IUserService userService;
-
-	  
-	  
-	  
-	  
-	  
-	  
-	  public ModelAndView article() {
+	  public ModelAndView articleCreate() {
 		  return new ModelAndView("articleCreate");
 	  }
 	  
+	  
+	  
+//	  NE FONCTIONNE PAS !!
+//	  public ModelAndView articlesList() {
+//		  return new ModelAndView("articlesList");
+//	  }
+//	  public ModelAndView articleUpdate() {
+//		  return new ModelAndView("articleUpdate");
+//	  }
+//	  public ModelAndView articleDétail() {
+//		  return new ModelAndView("articleDétail");
+//	  }
+//	 
+//	  
 	  
 	@RequestMapping("/articlesList")
 	public String showListArticlesPage(Model model) {

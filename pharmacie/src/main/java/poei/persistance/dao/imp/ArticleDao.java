@@ -21,20 +21,16 @@ public class ArticleDao implements IArticleDao {
 	@Override
 	public List<ArticleDo> findAllArticle() {
 		try (final Session session = sessionFactory.getCurrentSession()) {
-			final Transaction transaction = session.beginTransaction();
+			
 			String req = "From Article";
 
 			final Query<ArticleDo> query = session.createQuery(req, ArticleDo.class);
 			final List<ArticleDo> listeArticleDo = query.getResultList();
 			session.flush();
-			transaction.commit();
+			
 			return listeArticleDo;
-
-			// On gère l'exception
-		} catch (final HibernateException hibernateException) {
-			hibernateException.printStackTrace();
-		}
-		return new ArrayList<>();
+		} 
+	
 	}
 
 	@Override
@@ -46,24 +42,21 @@ public class ArticleDao implements IArticleDao {
 	@Override
 	public ArticleDo createArticle(final ArticleDo article) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
-			final Transaction transaction = session.beginTransaction();
-
+			
 			session.save(article);
 
 			session.flush();
-			transaction.commit();
+			
 			
 			return article;
-		} catch (Exception e) {
-			// TODO: handle exception
 		}
-		return null;
+		
 	}
 
 	@Override
 	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {
 		try (final Session session = sessionFactory.getCurrentSession()) {
-			final Transaction transaction = session.beginTransaction();
+			
 
 			final StringBuilder hqlQuery = new StringBuilder();
 			hqlQuery.append(
@@ -76,7 +69,7 @@ public class ArticleDao implements IArticleDao {
 			articleDo.setId(id);
 
 			session.flush();
-			transaction.commit();
+			
 			return new ArticleDo();
 
 			// On gère l'exception
