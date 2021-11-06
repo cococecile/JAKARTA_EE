@@ -8,13 +8,17 @@
             <td>Name: </td>
             <td><form:input path="nom"/></td>
         </tr>
+         <tr>
+            <td>Name: </td>
+            <td><form:input path="prenom"/></td>
+        </tr>
         <tr>
             <td>Email: </td>
             <td><form:input path="email"/></td>
         </tr>
          <tr>
             <td>Mot de passe: </td>
-            <td><form:input path="mot_de_passe"/></td>
+            <td><form:input  type="password" path="mot_de_passe"/></td>
         </tr>
         <tr>
             <td>adresse: </td>
@@ -22,7 +26,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Create"/></td>
+            <td><input type="submit" value="Update"/></td>
         </tr>
     </table>
 </form:form>

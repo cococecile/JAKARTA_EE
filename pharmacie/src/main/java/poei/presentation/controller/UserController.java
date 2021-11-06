@@ -5,13 +5,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
+import poei.persistance.bean.UserDo;
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
@@ -32,13 +35,23 @@ public class UserController {
 
 	@RequestMapping("/create-user")
 	public String showCreateUserPage(Model model) {
-		model.addAttribute("command", new UserDto());
+		UserDto user =new UserDto();
+		model.addAttribute("command", user);
 		return "userCreate";
 	}
 
+
 	@RequestMapping(value = "/create-User", method = RequestMethod.POST)
-	public String createUser(@ModelAttribute("user") UserDto user) {
-		userService.createUser(user);
+	@ResponseStatus(value=HttpStatus.CREATED)
+	public String createUser(@ModelAttribute("userDo") UserDto user) {
+		
+		 try { 
+			 this.userService.createUser(user);
+		
+		 } catch (Exception e) {
+	            // trsansaction has already been rolled back.
+			 System.out.print(e.getMessage());
+	        }
 		log.debug("request to save User : {}", user);
         return "redirect:/read-user";
     }
@@ -51,13 +64,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update-user/{id}", method = RequestMethod.POST)
-    public String updateContact(@PathVariable int id, @ModelAttribute("user")  UserDto user) {
+    public String updateUser(@PathVariable int id, @ModelAttribute("UserDo")  UserDto user) {
         userService.updateUSer(user, id);
         return "redirect:/read-user";
     }
 
     @RequestMapping(value = "/delete-user/{id}")
-    public String deleteContact(@PathVariable int id) {
+    public String deleteUser(@PathVariable int id) {
         userService.delete(id);
         return "redirect:/read-user";
     }

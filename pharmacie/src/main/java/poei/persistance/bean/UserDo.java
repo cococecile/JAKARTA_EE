@@ -30,7 +30,7 @@ public class UserDo {
 	private String mot_de_passe;
 
 	public UserDo() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 
