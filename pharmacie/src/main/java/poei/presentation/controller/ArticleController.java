@@ -1,5 +1,7 @@
 package poei.presentation.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.ArticleDto;
-import poei.service.IUserService;
+import poei.presentation.bean.UserDto;
 import poei.service.imp.ArticleService;
+
+
 
 @Controller
 public class ArticleController {
@@ -23,38 +27,32 @@ public class ArticleController {
 		  return new ModelAndView("articleCreate");
 	  }
 	  
+	  @RequestMapping("/articlesList")
+	  public ModelAndView articlesList() {
+		  return new ModelAndView("articlesList");
+	  }
+	  @RequestMapping("/articleUpdate")
+	  public ModelAndView articleLUpdate() {
+		  return new ModelAndView("articlesList");
+	  }
 	  
-	  
-//	  NE FONCTIONNE PAS !!
-//	  public ModelAndView articlesList() {
-//		  return new ModelAndView("articlesList");
-//	  }
-//	  public ModelAndView articleUpdate() {
-//		  return new ModelAndView("articleUpdate");
-//	  }
-//	  public ModelAndView articleDétail() {
-//		  return new ModelAndView("articleDétail");
-//	  }
-//	 
-//	  
-	  
-	@RequestMapping("/articlesList")
-	public String showListArticlesPage(Model model) {
-	    model.addAttribute("articles", articleService.getAllArticle());
-	    return "articlesList";
-	}
+	  @RequestMapping("/articleDétail")
+	  public ModelAndView articleDétail() {
+		  return new ModelAndView("articlesList");
+	  }
 
-    @RequestMapping("/articleCreate")
-    public String showCreateArticlePage(Model model) {
-        model.addAttribute("command", new ArticleDto());
-        return "articleCreate";
-    }
-    
-    @RequestMapping(value = "/articleCreate", method = RequestMethod.POST)
-    public String  createArticle(@ModelAttribute("article")ArticleDto article) {
-        articleService.create(article);
-        return "redirect:/articleDetail";
-    }
+
+	  @RequestMapping("/articleCreate")
+	    public String showCreateArticlePage(Model model) {
+	        model.addAttribute("command", new ArticleDto());
+	        return "articleCreate";
+	    }
+	    
+	    @RequestMapping(value = "/articleCreate", method = RequestMethod.POST)
+	    public String  createArticle(@ModelAttribute("article")ArticleDto article) {
+	        articleService.create(article);
+	        return "redirect:/articleDetail";
+	    }
 
 
     @RequestMapping(value = "/articleUpdate/{id}")
@@ -73,4 +71,5 @@ public class ArticleController {
 }
     
     
+
 

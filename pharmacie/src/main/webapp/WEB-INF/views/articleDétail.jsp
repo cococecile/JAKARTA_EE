@@ -6,8 +6,8 @@
         <title>detail D'acticle </title>
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
-    <body>
-        <form method="post" action="inscription">
+   <body style="background-color:#4BA74D;">
+        <form method="post" action="articlesList">
         <fieldset>
                 <legend>Détail d'acticle</legend>
                 <p>Vous pouvez consulter le detail d'un article ici.</p>
@@ -26,7 +26,15 @@
                 <input type="text" id="confirmation" name="confirmation" value="" size="20" maxlength="20" />
                 
                 <br />
-
+                
+                
+                <input type="submit" value="Valider" class="sansLabel" />
+                 <a href="articlesListe" class="signup-image-link">Valider</a> 
+                <br />
+                
+                <a href="login" class="signup-image-link">Login</a> 
+                <a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
+                
             </fieldset>
         </form>
     </body>

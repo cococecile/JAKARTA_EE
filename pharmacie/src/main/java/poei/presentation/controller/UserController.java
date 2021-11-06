@@ -1,5 +1,6 @@
 package poei.presentation.controller;
 
+
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
@@ -21,6 +25,7 @@ public class UserController {
 
 	@Autowired
 	IUserService userService;
+
 
 	@RequestMapping("/read-user")
 	public String showReadUserPage(Model model) {
@@ -62,3 +67,4 @@ public class UserController {
 		return "redirect:/read-user";
 	}
 }
+

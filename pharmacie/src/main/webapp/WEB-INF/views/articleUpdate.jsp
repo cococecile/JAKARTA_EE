@@ -6,8 +6,8 @@
         <title>Mise à jour d'acticle </title>
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
-    <body>
-        <form method="post" action="inscription">
+    <body style="background-color:#4BA74D;">
+        <form method="post" action="articlesList">
         <fieldset>
                 <legend>Mise à jour d'acticle</legend>
                 <p>Vous pouvez mettre à jour un article via ce formulaire.</p>
@@ -30,8 +30,12 @@
                 
                 <br />
 
-                <input type="submit" value="article" class="sansLabel" />
+                <input type="submit" value="Valider" class="sansLabel" />
+                 <a href="articlesListe" class="signup-image-link">Valider</a> 
                 <br />
+                
+                <a href="login" class="signup-image-link">Login</a> 
+                <a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
             </fieldset>
         </form>
     </body>

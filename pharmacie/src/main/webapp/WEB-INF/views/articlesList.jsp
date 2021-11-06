@@ -6,7 +6,10 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background-color:#4BA74D;">
 
+                
+                <a href="login" class="signup-image-link">Login</a> 
+                <a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
 </body>
 </html>
