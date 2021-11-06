@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body style="background-color:#4BA74D;">
+		<form method="post" action="articlesList">
 
                 
                 <a href="login" class="signup-image-link">Login</a> 
                 <a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
+        </form>
 </body>
 </html>

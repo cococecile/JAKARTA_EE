@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
    <<body style="background-color:#4BA74D;">
-        <form method="post" action="inscription">
+        <form method="post" action="welcome">
             <fieldset>
                 <legend>Inscription</legend>
                 <p>Vous pouvez vous inscrire via ce formulaire.</p>
@@ -34,7 +34,7 @@
                 <span class="erreur">${erreurs['nom']}</span>
                 <br />
 
-                <input type="submit" value="Inscription" class="sansLabel" />
+                <input type="submit" value="welcome" class="sansLabel" />
                 <br />
 
                 <p class="${empty erreurs ? 'succes' : 'erreur'}">${resultat}</p>

@@ -33,7 +33,7 @@
 				<br>
 				<div style="display: flex; justify-content: space-between;">
 					<a href="login" class="signup-image-link">Login</a> 
-					<a href="${pageContext.request.contextPath}/user/articles" class="signup-image-link">View Articles</a>
+					<a href="${pageContext.request.contextPath}/articlesList" class="signup-image-link">View Articles</a>
 					<a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
 				</div>
 			</div>

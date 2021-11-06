@@ -41,7 +41,7 @@ public class ArticleDao implements IArticleDao {
 
 	@Override
 	public ArticleDo createArticle(final ArticleDo article) {
-		try (final Session session = sessionFactory.getCurrentSession()) {
+		final Session session = sessionFactory.getCurrentSession(); 
 			
 			session.save(article);
 
@@ -51,7 +51,7 @@ public class ArticleDao implements IArticleDao {
 			return article;
 		}
 		
-	}
+	
 
 	@Override
 	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {

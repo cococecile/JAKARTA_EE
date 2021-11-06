@@ -82,7 +82,8 @@ public class ArticleService implements IArticleService {
 
 	@Override
 	public ArticleDto create(final ArticleDto articleDto) {
-		final ArticleDto newArticle = mapToArticleDto(articleDao.createArticle(mapToArticleDo(articleDto)));
+		final ArticleDo article = articleDao.createArticle(mapToArticleDo(articleDto));
+		final ArticleDto newArticle = mapToArticleDto(article);
 		if (null != newArticle) {
 			return newArticle;
 
