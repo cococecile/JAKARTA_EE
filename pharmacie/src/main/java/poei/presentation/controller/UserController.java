@@ -51,7 +51,7 @@ public class UserController {
 	@RequestMapping(value = "/update-user/{id}")
 	public String showUpdateUserPage(@PathVariable int id, Model model) {
 		model.addAttribute("id", id);
-		model.addAttribute("command", userService.findUser(id));
+		model.addAttribute("user", userService.findUser(id));
 		return "userUpdate";
 	}
 
