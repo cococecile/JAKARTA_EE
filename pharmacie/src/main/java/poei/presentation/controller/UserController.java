@@ -2,27 +2,28 @@ package poei.presentation.controller;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 
 @Controller
 public class UserController {
-	private final Logger log = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	IUserService userService;
+
+	public ModelAndView userCreate() {
+		return new ModelAndView("userCreate");
+	}
 
 	@RequestMapping("/read-user")
 	public String showReadUserPage(Model model) {
@@ -34,24 +35,18 @@ public class UserController {
 
 	@RequestMapping("/create-user")
 	public String showCreateUserPage(Model model) {
-		UserDto user = new UserDto();
-		model.addAttribute("command", user);
+
+		model.addAttribute("command", new UserDto());
 		return "userCreate";
 	}
 
 	@RequestMapping(value = "/create-User", method = RequestMethod.POST)
-	@ResponseStatus(value = HttpStatus.CREATED)
-	public String createUser(@ModelAttribute("userDo") UserDto user) {
+	public String createUser(@ModelAttribute("command") UserDto user, BindingResult errors, Model model) {
+		model.addAttribute("nomuser", user.getNom());
+		UserDto newuser = userService.createUser(user);
 
-		try {
-			this.userService.createUser(user);
-
-		} catch (Exception e) {
-			// trsansaction has already been rolled back.
-			System.out.print(e.getMessage());
-		}
-		log.debug("request to save User : {}", user);
 		return "redirect:/read-user";
+
 	}
 
 	@RequestMapping(value = "/update-user/{id}")
