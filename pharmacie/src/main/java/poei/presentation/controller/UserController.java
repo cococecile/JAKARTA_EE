@@ -40,19 +40,21 @@ public class UserController {
 
 	@RequestMapping("/create-user")
 	public String showCreateUserPage(Model model) {
-		model.addAttribute("command",new UserDto());
+		model.addAttribute("user",new UserDto());
 		return "userCreate";
 	}
 	
 
 	@RequestMapping(value ="/create-User", method = RequestMethod.POST)
-	public String createUser(@ModelAttribute("command") UserDto user,BindingResult errors, Model model) {
-		model.addAttribute("nomuser", user.getNom());
-		UserDto newuser = userService.createUser(user);
+	public String createUser(@ModelAttribute("user") UserDto user) {
 		
-
-        return "redirect:/read-user";
-	
+		UserDto newuser = userService.create(user);
+		if (null != newuser) {
+			
+			return "redirect:/read-user";
+			
+		}
+		return "redirect:/userCreate";
 
     }
 
@@ -64,7 +66,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/update-user/{id}", method = RequestMethod.POST)
-    public String updateUser(@PathVariable int id, @ModelAttribute("UserDo")  UserDto user) {
+    public String updateUser(@PathVariable int id, @ModelAttribute("user")  UserDto user) {
         userService.updateUSer(user, id);
         return "redirect:/read-user";
     }

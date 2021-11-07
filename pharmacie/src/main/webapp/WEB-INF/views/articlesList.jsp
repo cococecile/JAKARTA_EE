@@ -29,7 +29,7 @@
         </c:forEach>
     </table>
 <br/>
-<a href="/articleCreate">Create User</a>
+<a href="/articleCreate">Create Article</a>
 
 </body>
 </html>

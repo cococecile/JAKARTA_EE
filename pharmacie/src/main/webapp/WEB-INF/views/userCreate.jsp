@@ -11,10 +11,12 @@
 
 </head>
 <body style="background-color: #4BA78D;">
-<c:url var="actionUrl" value="create-user" />
 
-<form:form method="POST" action="${actionUrl}"  >
-
+<form:form action="create-user" method="POST"
+		modelAttribute="user" >
+<fieldset>
+			                <legend>Creation d'utilisateur</legend> -->
+			               <p>Vous pouvez vous créer un nouvel utilisateur via ce formulaire.</p> -->
 <form:hidden path="id" />
     <table>
         <tr>
@@ -45,4 +47,7 @@
 					href="read-user">Cancel</a></td>
         </tr>
     </table>
+    </fieldset>
 </form:form>
+</body>
+</html>
