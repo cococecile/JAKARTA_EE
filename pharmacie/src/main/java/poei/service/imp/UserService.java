@@ -113,11 +113,20 @@ public class UserService implements IUserService {
 		 
 
 	@Override
-	public UserDto updateUSer(final UserDto userDto, final int id) {
-		final UserDto updatedUser = mapToUserDto(userDao.update(mapToUserDo(userDto), id));
-		if (updatedUser != null) {
-			return updatedUser;
+	public UserDto updateUSer(UserDto userDto, int id) {
+		UserDo userDo = userDao.findUser(id);
+		if (null != userDo) {
+			
+			userDo.setId(userDto.getId());
+		userDo.setNom(userDto.getNom());
+		userDo.setPrenom(userDto.getPrenom());
+		userDo.setAdresse(userDto.getAdresse());
+		userDo.setMot_de_passe(userDto.getMot_de_passe());
+		userDo.setEmail(userDto.getEmail());
+			final UserDo updatedUser = userDao.update(userDo, id);
+			return mapToUserDto(updatedUser);
 		}
+
 		return null;
 	}
 
@@ -127,5 +136,15 @@ public class UserService implements IUserService {
 		return resulat;
 
 	}
-
+	public UserDto getById(int id) {
+		// on va récupérer l'id dans une variable
+		final UserDto userDto = mapToUserDto(userDao.findUser(id));
+		
+		if (userDto == null){
+			return null;
+		}
+		
+			return userDto;
+		
+	}
 }

@@ -23,6 +23,7 @@
 				<td>${article.designation}</td>
 				<td>${article.description}</td>
 				<td>${article.quantite}</td>
+
 				<td><a href="/articleDetail/${article.id}">Plus
 						d'informations</a></td>
 				<td><a href="/articleUpdate/${article.id}">Update</a></td>
@@ -31,11 +32,10 @@
 		</c:forEach>
 	</table>
 	<br />
+
 	<a href="/articleCreate">Create Article</a>
 	<br>
 	<a href="/welcome">Welcome</a>
-
-
 
 </body>
 </html>

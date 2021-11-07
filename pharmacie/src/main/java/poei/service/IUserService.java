@@ -54,4 +54,6 @@ public interface IUserService {
 	 */
 	boolean delete(final int id);
 
+	UserDto getById(int id);
+
 }

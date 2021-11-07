@@ -20,7 +20,6 @@ public class UserDao implements IUserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-
 	@Override
 	public List<UserDo> findAllUser() {
 		String req = "From UserDo";
@@ -39,9 +38,9 @@ public class UserDao implements IUserDao {
 	public UserDo findUser(final int id) {
 		final Session session = sessionFactory.getCurrentSession();
 
-		final Query<UserDo> query = session.createQuery("from UserDo where id = :id", UserDo.class);
+		final Query<UserDo> query = session.createQuery("From UserDo where id = :idParam", UserDo.class);
 		// on initialise le paramètre
-		query.setParameter("id", id);
+		query.setParameter("idParam", id);
 		// regarder la Javadoc de Optional
 		final Optional<UserDo> userDo = query.uniqueResultOptional();
 		session.flush();
@@ -87,22 +86,26 @@ public class UserDao implements IUserDao {
 
 		final StringBuilder hqlQuery = new StringBuilder();
 		hqlQuery.append(
-				"update userDo  set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where u.id = :id");
+				"update UserDo  set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where u.id = :id");
 
 		final Query<?> query = session.createQuery(hqlQuery.toString());
 		// intialisation des paramètres
+		query.setParameter("id", userDo.getId());
 		query.setParameter("nom", userDo.getNom());
 		query.setParameter("prenom", userDo.getPrenom());
 		query.setParameter("adresse", userDo.getAdresse());
 		query.setParameter("email", userDo.getEmail());
 		query.setParameter("mot_de_passe", userDo.getMot_de_passe());
-		query.executeUpdate();
+		int modifications = query.executeUpdate();
+
+		if (modifications == 1) {
+			return userDo;
+		}
 
 		session.flush();
 
-		// on "complète" le Do à retourner
-		userDo.setId(id);
-		return userDo;
+		return new UserDo();
+		
 	}
 
 	@Override

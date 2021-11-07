@@ -106,4 +106,17 @@ public class ArticleController {
 		return "redirect:/articleUpdate";
 	}
 
+	/**
+	 * Permet supprimer un article
+	 * 
+	 * @param article
+	 * @return redirection vers la jsp articleList
+	 */
+	@RequestMapping(value = "/articleDelete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable int id) {
+		articleService.deleteArticle(id);
+
+		return "redirect:/articlesList";
+
+	}
 }
