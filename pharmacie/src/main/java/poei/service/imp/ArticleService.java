@@ -51,6 +51,7 @@ public class ArticleService implements IArticleService {
 		if (articleDto == null) {
 			return null;
 		}
+
 		articleDo.setId(articleDto.getId());
 		articleDo.setDesignation(articleDto.getDesignation());
 		articleDo.setDescription(articleDto.getDescription());
@@ -92,9 +93,9 @@ public class ArticleService implements IArticleService {
 
 		ArticleDo articleDo = articleDao.findArticleById(id);
 		if (null != articleDo) {
-			articleDo.setDesignation(articleDo.getDesignation());
-			articleDo.setDescription(articleDo.getDescription());
-			articleDo.setQuantite(articleDo.getQuantite());
+			articleDo.setDesignation(articleDto.getDesignation());
+			articleDo.setDescription(articleDto.getDescription());
+			articleDo.setQuantite(articleDto.getQuantite());
 			final ArticleDo updatedArticle = articleDao.updateArticle(articleDo, id);
 			return mapToArticleDto(updatedArticle);
 
@@ -104,7 +105,7 @@ public class ArticleService implements IArticleService {
 	}
 
 	@Override
-	public void delete(int id) {
+	public void deleteArticle(int id) {
 		// TODO Auto-generated method stub
 
 	}

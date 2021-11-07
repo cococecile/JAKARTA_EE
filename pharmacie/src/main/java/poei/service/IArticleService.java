@@ -44,7 +44,7 @@ public interface IArticleService {
 	 * 
 	 * @param id
 	 */
-	void delete(int id);
+	void deleteArticle(int id);
 
 	
 
