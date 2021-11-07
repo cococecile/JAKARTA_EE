@@ -56,7 +56,7 @@ public class UserController {
 	public String createUser(@ModelAttribute("user") UserDto user) {
 		UserDto newUser = userService.create(user);
 		if (null != newUser) {
-			return "redirect:/read-user";
+			return "redirect:/articlesList";
 		}
 
 		return "redirect:/create-user";
