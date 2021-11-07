@@ -94,18 +94,15 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDto createUser(final UserDto userDto) {
-		UserDo user = new UserDo();
-		 user = mapToDo(userDto);
-                     user =userDao.create(user);
-					 System.out.println("ajout user");
-		final UserDto createdUser = mapToDto(user);
-		if (createdUser!= null) {
-			System.out.println("ajout user");
-			return createdUser;
+		final UserDo user = userDao.create(mapToDo(userDto));
+		final UserDto newUser = mapToDto(user);
+		if (null != newUser) {
+			return newUser;
 
 		}
-		return null;
-	}
+
+		return new UserDto();}
+		 
 
 	@Override
 	public UserDto updateUSer(final UserDto userDto, final int id) {
