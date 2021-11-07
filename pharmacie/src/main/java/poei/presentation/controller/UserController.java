@@ -33,19 +33,33 @@ public class UserController {
 		return "usersList";
 	}
 
+	/**
+	 * Permet d'afficher le formulaire de création d'un user
+	 * @param model
+	 * @return direction vers la jsp userCreate
+	 */
 	@RequestMapping("/create-user")
 	public String showCreateUserPage(Model model) {
 
-		model.addAttribute("command", new UserDto());
+		model.addAttribute("user", new UserDto());
 		return "userCreate";
 	}
 
-	@RequestMapping(value = "/create-User", method = RequestMethod.POST)
-	public String createUser(@ModelAttribute("command") UserDto user, BindingResult errors, Model model) {
-		model.addAttribute("nomuser", user.getNom());
-		UserDto newuser = userService.createUser(user);
+	
+	/**
+	 * Permet de créer un user
+	 * @param user
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/create-user", method = RequestMethod.POST)
+	public String createUser(@ModelAttribute("user") UserDto user) {
+		UserDto newUser = userService.createUser(user);
+		if (null != newUser) {
+			return "redirect:/read-user";
+		}
 
-		return "redirect:/read-user";
+		return "redirect:/create-user";
 
 	}
 

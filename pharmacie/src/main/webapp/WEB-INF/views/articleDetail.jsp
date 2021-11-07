@@ -18,7 +18,7 @@
 		</tr>
 		<tr>
 			<td>Description :</td>
-			<td>${artcle.description}</td>
+			<td>${article.description}</td>
 		</tr>
 		<tr>
 			<td>Quantité :</td>
@@ -26,12 +26,17 @@
 		</tr>
 
 		<tr>
-			<td>Pour plus d'information Merci de consulter le dictionnaire
-				medical :</td>
-			<td><a href="https://www.vidal.fr/medicaments.html">
+
+			<td><br /> <br /> <br /> <br /> Pour plus d'information
+				Merci de consulter le dictionnaire medical : <a
+				href="https://www.vidal.fr/medicaments.html" target="_blank">
 					Dictionnaire VIDAL </a></td>
 		</tr>
 	</table>
+	<br />
+	<br />
+	<br />
+	<br />
 	<br />
 	<a href="/articlesList">Retour liste des Articles</a>
 </body>

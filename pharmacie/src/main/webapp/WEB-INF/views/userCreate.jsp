@@ -11,10 +11,9 @@
 
 </head>
 <body style="background-color: #4BA78D;">
-<c:url var="actionUrl" value="create-user" />
 
 
-<form:form method="POST" action="${actionUrl}"  >
+<form:form method="POST" action="create-user"  modelAttribute="user">
 
 <form:hidden path="id" />
     <table>

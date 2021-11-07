@@ -76,9 +76,8 @@ public class UserDao implements IUserDao {
 
 		final Session session = sessionFactory.getCurrentSession();
 
-		session.saveOrUpdate(userDo);
+		session.save(userDo);
 		session.flush();
-		session.getTransaction().commit();
 
 		return userDo;
 
