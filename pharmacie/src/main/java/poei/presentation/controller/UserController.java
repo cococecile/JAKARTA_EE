@@ -1,5 +1,6 @@
 package poei.presentation.controller;
 
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
@@ -47,10 +49,10 @@ public class UserController {
 	public String createUser(@ModelAttribute("command") UserDto user,BindingResult errors, Model model) {
 		model.addAttribute("nomuser", user.getNom());
 		UserDto newuser = userService.createUser(user);
-		if (newuser != null) {
+		
 
-        return "redirect:/read-user";}
-	return "usersList";
+        return "redirect:/read-user";
+	
 
     }
 
@@ -73,3 +75,4 @@ public class UserController {
         return "redirect:/read-user";
     }
 }
+

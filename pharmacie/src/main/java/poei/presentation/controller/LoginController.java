@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.UserDto;
@@ -63,4 +64,5 @@ public class LoginController {
 		mav.addObject("user-sign-up", new UserDto()); // Set the model attribute as "user-sign-up"
 		return mav;
 	}
+
 }
