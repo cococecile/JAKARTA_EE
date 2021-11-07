@@ -10,14 +10,17 @@
 <title>Créer Article</title>
 <link type="text/css" rel="stylesheet" href="form.css" />
 </head>
+
 <body style="background-color: #4BA74D;">
 
 	<form:form action="articleCreate" method="POST"
 		modelAttribute="article">
 
 		<fieldset>
-			                <legend>Creation d'acticle</legend> -->
-			               <p>Vous pouvez vous créer un nouvel article via ce formulaire.</p> -->
+
+			<legend>Creation d'acticle</legend>
+			<p>Vous pouvez vous créer un nouvel article via ce formulaire.</p>
+
 			<form:hidden path="id" />
 			<table>
 				<tr>
@@ -34,8 +37,8 @@
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
-					<td><input type="submit" value="Submit" /> <a
-						href="articleList">Cancel</a></td>
+					<td><input type="submit" value="Submit" /></td>
+					<td><a href="articlesList">Cancel</a></td>
 					<td>&nbsp;</td>
 				</tr>
 			</table>

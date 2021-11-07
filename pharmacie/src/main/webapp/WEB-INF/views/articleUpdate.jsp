@@ -10,13 +10,16 @@
 <title>Update Article</title>
 <link type="text/css" rel="stylesheet" href="form.css" />
 </head>
+
 <body style="background-color: #4BA74D;">
-	<form:form method="POST" action="articleUpdate" modelAttribute="article">
+	<form:form action="/articleUpdate" method="POST"
+		modelAttribute="article">
+
 		<form:hidden path="id" />
 		<table>
 			<tr>
 				<td>Désignation :</td>
-				<td><form:input path="designation"/></td>
+				<td><form:input path="designation" /></td>
 			</tr>
 			<tr>
 				<td>Description :</td>
@@ -28,8 +31,9 @@
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><input type="submit" value="Submit" /> <a
-					href="articleList">Cancel</a></td>
+				<td><input type="submit" value="Submit" /></td>
+				<td><a href="${pageContext.request.contextPath}/articlesList">Cancel</a></td>
+
 				<td>&nbsp;</td>
 			</tr>
 		</table>

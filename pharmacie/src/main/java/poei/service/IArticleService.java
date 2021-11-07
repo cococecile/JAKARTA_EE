@@ -48,6 +48,7 @@ public interface IArticleService {
 	 * 
 	 * @param id
 	 */
+
 	boolean deleteArticle(final int id);
 
 

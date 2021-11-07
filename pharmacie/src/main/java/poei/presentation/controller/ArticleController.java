@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import poei.presentation.bean.ArticleDto;
@@ -21,6 +20,12 @@ public class ArticleController {
 	@Autowired
 	ArticleService articleService;
 
+	/**
+	 * Permet de recuperer la liste des articles pour la jsp
+	 * 
+	 * @param model
+	 * @return redirection vers la jsp articleList
+	 */
 	@RequestMapping("/articlesList")
 	public ModelAndView articlesList(Model model) {
 		List<ArticleDto> articles = articleService.getAllArticle();
@@ -28,24 +33,52 @@ public class ArticleController {
 		return new ModelAndView("articlesList");
 	}
 
-	@RequestMapping("/articleUpdate")
-	public String showArticleUpdate(@RequestParam("id") int id, Model model) {
-		final ArticleDto article = articleService.getById(id);
-		model.addAttribute("article", article);
-		return "articleUpdate";
+	/**
+	 * Permet de recuperer un articles pour la jsp
+	 * 
+	 * @return redirection vers le fomulaire d'edition
+	 */
+	@RequestMapping("/articleDetail/{id}")
+	public ModelAndView articleDétail(@PathVariable int id, Model model) {
+
+		model.addAttribute("article", articleService.getById(id));
+
+		return new ModelAndView("articleDetail");
 	}
 
-	@RequestMapping("/articleDétail")
-	public ModelAndView articleDétail() {
-		return new ModelAndView("articlesList");
-	}
-
+	/**
+	 * Affiche le formulaire de creation d'un article
+	 * 
+	 * @param model
+	 * @return redirection vers le fomulaire de création
+	 */
 	@RequestMapping("/articleCreate")
 	public String showCreateArticlePage(Model model) {
 		model.addAttribute("article", new ArticleDto());
 		return "articleCreate";
 	}
 
+	/**
+	 * Affiche le formulaire d'édition d'un article
+	 * 
+	 * @param id
+	 * @param model
+	 * @return redirection vers le fomulaire d'edition
+	 */
+	@RequestMapping(value = "/articleUpdate/{id}")
+	public String showUpdateArticlePage(@PathVariable int id, Model model) {
+
+		model.addAttribute("article", articleService.getById(id));
+		return "articleUpdate";
+	}
+
+	/**
+	 * Permet de creer un article
+	 * 
+	 * @param article
+	 * @return redirection vers la jsp articleList si creation ok sinon vers le
+	 *         formulaire de creation
+	 */
 	@RequestMapping(value = "/articleCreate", method = RequestMethod.POST)
 	public String createArticle(@ModelAttribute("article") ArticleDto article) {
 		ArticleDto newArticle = articleService.create(article);
@@ -53,21 +86,37 @@ public class ArticleController {
 			return "redirect:/articlesList";
 
 		}
-//		log.debug("request to save User : {}", user);
 		return "redirect:/articleCreate";
 	}
 
-	@RequestMapping(value = "/articleUpdate/{id}")
-	public String showUpdateArticlePage(@PathVariable int id, Model model) {
-		model.addAttribute("id", id);
-		model.addAttribute("command", articleService.getById(id));
-		return "articleUpdate";
+	/**
+	 * Permet d'editer un article
+	 * 
+	 * @param article
+	 * @return redirection vers la jsp articleList si edition OK sinon vers le
+	 *         formulaire d'édition
+	 */
+	@RequestMapping(value = "/articleUpdate", method = RequestMethod.POST)
+	public String updateArticle(@ModelAttribute("article") ArticleDto article) {
+		ArticleDto updatedArticle = articleService.updateArticle(article, article.getId());
+		if (updatedArticle != new ArticleDto()) {
+			return "redirect:/articlesList";
+
+		}
+		return "redirect:/articleUpdate";
 	}
 
-	@RequestMapping(value = "/articleUpdate/{id}", method = RequestMethod.POST)
-	public String updateArticle(@PathVariable int id, @ModelAttribute("article") ArticleDto article) {
-		articleService.updateArticle(article, id);
-		return "redirect:/articleDétail";
-	}
+	/**
+	 * Permet supprimer un article
+	 * 
+	 * @param article
+	 * @return redirection vers la jsp articleList
+	 */
+	@RequestMapping(value = "/articleDelete/{id}", method = RequestMethod.GET)
+	public String delete(@PathVariable int id) {
+		articleService.deleteArticle(id);
 
+		return "redirect:/articlesList";
+
+	}
 }

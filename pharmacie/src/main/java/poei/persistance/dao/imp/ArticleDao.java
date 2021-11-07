@@ -56,6 +56,7 @@ public class ArticleDao implements IArticleDao {
 
 		final Session session = sessionFactory.getCurrentSession();
 
+
 		session.save(articleDo);
 
 		session.flush();
@@ -85,30 +86,28 @@ public class ArticleDao implements IArticleDao {
 
 	@Override
 	public ArticleDo updateArticle(final ArticleDo articleDo, final int id) {
-		try (final Session session = sessionFactory.getCurrentSession()) {
+		final Session session = sessionFactory.getCurrentSession();
 
-			final StringBuilder hqlQuery = new StringBuilder();
-			hqlQuery.append(
-					"update ArticleDo set designation = :designation, description = :description where id = :id");
+		final StringBuilder hqlQuery = new StringBuilder();
+		hqlQuery.append(
+				"update ArticleDo set designation = :designation, description = :description, quantite = :quantite where id = :id");
 
-			final Query<?> query = session.createQuery(hqlQuery.toString());
-			// initialisation des paramètres
-			query.setParameter("designation", articleDo.getDesignation());
-			query.setParameter("description", articleDo.getDescription());
-			query.setParameter("quantite", articleDo.getQuantite());
-			query.executeUpdate();
+		final Query<?> query = session.createQuery(hqlQuery.toString());
+		// initialisation des paramètres
+		query.setParameter("id", articleDo.getId());
+		query.setParameter("description", articleDo.getDescription());
+		query.setParameter("designation", articleDo.getDesignation());
+		query.setParameter("quantite", articleDo.getQuantite());
+		int modifications = query.executeUpdate();
 
-			articleDo.setId(id);
-
-			session.flush();
-
-			return new ArticleDo();
-
-			// On gère l'exception
-		} catch (final HibernateException hibernateException) {
-			hibernateException.printStackTrace();
+		if (modifications == 1) {
+			return articleDo;
 		}
-		return null;
+
+		session.flush();
+
+		return new ArticleDo();
+
 
 	}
 }

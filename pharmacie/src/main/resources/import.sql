@@ -8,6 +8,6 @@ INSERT INTO utilisateur (id, adresse, email, mot_de_passe, nom, prenom)	VALUES 	
 INSERT INTO utilisateur (id, adresse, email, mot_de_passe, nom, prenom) VALUES ((select nextval('utilisateur_id_seq')), '8 version java, 59000 lille','user@gmail.com','user','USER', 'User');
 
 ALTER SEQUENCE article_id_seq RESTART WITH 1;
-INSERT INTO public.article(id, description, designation, quantite)VALUES ((select nextval('article_id_seq')),  'Antalgique et anti_inflamatoire','Aspirine', 10);
-INSERT INTO public.article(id, description, designation, quantite)VALUES ((select nextval('article_id_seq')), ' Antalgique anti-douleur', 'Paracetamol',10);
+INSERT INTO public.article(id, description, designation, quantite)VALUES ((select nextval('article_id_seq')), 'Antalgique et anti_inflamatoire', 'Aspirine', 10);
+INSERT INTO public.article(id, description, designation, quantite)VALUES ((select nextval('article_id_seq')),' Antalgique anti-douleur','Paracetamol', 10);
 INSERT INTO public.article(id, description, designation, quantite)VALUES ((select nextval('article_id_seq')), 'Anti-inflamatoire',' Ibuprofène', 10);

@@ -53,12 +53,7 @@ public class ArticleService implements IArticleService {
 			return null;
 		}
 
-//		if (articleDto.getId() == 0) {
-//			articleDo.setId(100);
-//		}else {
-
 		articleDo.setId(articleDto.getId());
-//		}
 		articleDo.setDesignation(articleDto.getDesignation());
 		articleDo.setDescription(articleDto.getDescription());
 		articleDo.setQuantite(articleDto.getQuantite());
@@ -106,9 +101,9 @@ public class ArticleService implements IArticleService {
 
 		ArticleDo articleDo = articleDao.findArticleById(id);
 		if (null != articleDo) {
-			articleDo.setDesignation(articleDo.getDesignation());
-			articleDo.setDescription(articleDo.getDescription());
-			articleDo.setQuantite(articleDo.getQuantite());
+			articleDo.setDesignation(articleDto.getDesignation());
+			articleDo.setDescription(articleDto.getDescription());
+			articleDo.setQuantite(articleDto.getQuantite());
 			final ArticleDo updatedArticle = articleDao.updateArticle(articleDo, id);
 			return mapToArticleDto(updatedArticle);
 		}
