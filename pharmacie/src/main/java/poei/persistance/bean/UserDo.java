@@ -3,14 +3,17 @@ package poei.persistance.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
+@SequenceGenerator(name = "utilisateur_id_seq", initialValue = 1, allocationSize = 1)
 public class UserDo {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "utilisateur_id_seq")
 	@Column(name = "id", nullable = false)
 	private Integer id;
 	

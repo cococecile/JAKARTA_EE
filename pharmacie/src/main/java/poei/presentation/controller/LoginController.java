@@ -63,4 +63,5 @@ public class LoginController {
 		mav.addObject("user-sign-up", new UserDto()); // Set the model attribute as "user-sign-up"
 		return mav;
 	}
+
 }

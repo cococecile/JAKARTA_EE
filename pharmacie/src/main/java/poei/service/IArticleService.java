@@ -41,10 +41,15 @@ public interface IArticleService {
 	
 	/**
 	 * Permet de supprimer un article à partie de son id
+	 *récupère le DAO de persistance pour effacer l'article si résult //
+	 * boolean ArticleDto soit article soit pas article //
+	 * final: nous n'allons pas modifier 
+	 * supprimer par l'id
 	 * 
 	 * @param id
 	 */
-	void delete(int id);
+	boolean deleteArticle(final int id);
+
 
 	
 

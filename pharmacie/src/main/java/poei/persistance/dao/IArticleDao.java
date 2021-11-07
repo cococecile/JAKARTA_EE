@@ -45,6 +45,6 @@ public interface IArticleDao {
 	 * Permet de supprimer un article à partir de son id
 	 * @param id
 	 */
-	void delete(final int id);
+	boolean deleteArticle(final int id);
 	
 }

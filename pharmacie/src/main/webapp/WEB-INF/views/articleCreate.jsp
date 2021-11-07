@@ -1,40 +1,48 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<html lang="en">
+<html>
 <head>
-<%@ page isELIgnored="false"%>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pharmacie</title>
+<meta charset="utf-8" />
+<title>Créer Article</title>
+<link type="text/css" rel="stylesheet" href="form.css" />
 </head>
-<body>
-	<div>
-		<h2>New User</h2>
-		<div>
-			<div>
-				<form:form action="/articleCreate" modelAttribute="article"
-					method="post">
-					<div>
-						<div>
-							<form:label path="author">Author</form:label>
-							<form:input type="text" id="author" path="author" />
-							<form:errors path="author" />
-						</div>
-						<div>
-							<form:label path="name">Name</form:label>
-							<form:input type="text" id="name" path="name" />
-							<form:errors path="name" />
-						</div>
-					</div>
-					<div>
-						<div>
-							<input type="submit" value="Add User">
-						</div>
-					</div>
-				</form:form>
-			</div>
-		</div>
-	</div>
-</body>
+<body style="background-color: #4BA74D;">
 
+	<form:form action="articleCreate" method="POST"
+		modelAttribute="article">
+
+		<fieldset>
+			                <legend>Creation d'acticle</legend> -->
+			               <p>Vous pouvez vous créer un nouvel article via ce formulaire.</p> -->
+			<form:hidden path="id" />
+			<table>
+				<tr>
+					<td>Désignation :</td>
+					<td><form:input path="designation" /></td>
+				</tr>
+				<tr>
+					<td>Description :</td>
+					<td><form:input path="description" /></td>
+				</tr>
+				<tr>
+					<td>Quantité :</td>
+					<td><form:input path="quantite" /></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td><input type="submit" value="Submit" /> <a
+						href="articleList">Cancel</a></td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</fieldset>
+	</form:form>
+
+	<section></section>
+
+</body>
 </html>
