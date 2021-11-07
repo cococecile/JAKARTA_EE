@@ -29,14 +29,15 @@ public class ArticleService implements IArticleService {
 	 * @param ArticleDo
 	 * @return articleDto
 	 */
-	public ArticleDto mapToArticleDto(ArticleDo ArticleDo) {
+	public ArticleDto mapToArticleDto(ArticleDo articleDo) {
 		ArticleDto articleDto = new ArticleDto();
-		if (ArticleDo == null) {
+		if (articleDo == null) {
 			return null;
 		}
-		articleDto.setId(ArticleDo.getId());
-		articleDto.setDesignation(ArticleDo.getDesignation());
-		articleDto.setDescription(ArticleDo.getDescription());
+		articleDto.setId(articleDo.getId());
+		articleDto.setDesignation(articleDo.getDesignation());
+		articleDto.setDescription(articleDo.getDescription());
+		articleDto.setQuantite(articleDo.getQuantite());
 		return articleDto;
 	}
 
@@ -46,7 +47,7 @@ public class ArticleService implements IArticleService {
 	 * @param articleDto
 	 * @return articleDo
 	 */
-	public ArticleDo mapToArticleDto(ArticleDto articleDto) {
+	public ArticleDo mapToArticleDo(ArticleDto articleDto) {
 		ArticleDo articleDo = new ArticleDo();
 		if (articleDto == null) {
 			return null;
@@ -55,6 +56,7 @@ public class ArticleService implements IArticleService {
 		articleDo.setId(articleDto.getId());
 		articleDo.setDesignation(articleDto.getDesignation());
 		articleDo.setDescription(articleDto.getDescription());
+		articleDo.setQuantite(articleDto.getQuantite());
 		return articleDo;
 	}
 
@@ -82,10 +84,16 @@ public class ArticleService implements IArticleService {
 	}
 
 	@Override
-	public ArticleDto create(ArticleDto articleDto) {
-		// TODO Auto-generated method stub
+	public ArticleDto create(final ArticleDto articleDto) {
+		final ArticleDo article = articleDao.createArticle(mapToArticleDo(articleDto));
+		final ArticleDto newArticle = mapToArticleDto(article);
+		if (null != newArticle) {
+			return newArticle;
 
-		return null;
+		}
+
+		return new ArticleDto();
+
 	}
 
 	@Override
@@ -98,22 +106,38 @@ public class ArticleService implements IArticleService {
 			articleDo.setQuantite(articleDto.getQuantite());
 			final ArticleDo updatedArticle = articleDao.updateArticle(articleDo, id);
 			return mapToArticleDto(updatedArticle);
-
 		}
 
 		return null;
 	}
 
 	@Override
-	public void deleteArticle(int id) {
-		// TODO Auto-generated method stub
+	public boolean deleteArticle(final int id) {
+		// on va récupérer l'article par l'id dans une variable
+		final ArticleDto articleDto = getById(id);
+		// si l'article n'est pas vide alors
+		if (articleDto != null) {
+			// le résultat selon le statut de l'article sera de supprimer l'article ciblé par l'id au DAO.
+			boolean result = articleDao.deleteArticle(id);
+			// retourner le résultat ( supprimer )
+			return result;
+		}
+		// ou rien // 
+		return false;
 
 	}
 
 	@Override
 	public ArticleDto getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		// on va récupérer l'id dans une variable
+		final ArticleDto articleDto = mapToArticleDto(articleDao.findArticleById(id));
+		
+		if (articleDto == null){
+			return null;
+		}
+		
+			return articleDto;
+		
 	}
 
 }

@@ -12,7 +12,7 @@ import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 import poei.util.cryptage.MD5Encryption;
 
-@Service
+@Service("UserService")
 public class UserService implements IUserService {
 
 	@Autowired
@@ -66,7 +66,9 @@ public class UserService implements IUserService {
 
 	@Override
 	public List<UserDto> findAll() {
-		final List<UserDto> liste = mapToListDto(userDao.findAllUser());
+		final List<UserDo> users = userDao.findAllUser();
+		final List<UserDto> liste = mapToListDto(users);
+
 		return liste;
 	}
 
@@ -92,9 +94,15 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDto createUser(final UserDto userDto) {
-		final UserDto createdUser = mapToDto(userDao.create(mapToDo(userDto)));
+		UserDo user = new UserDo();
+		 user = mapToDo(userDto);
+                     user =userDao.create(user);
+					 System.out.println("ajout user");
+		final UserDto createdUser = mapToDto(user);
 		if (createdUser!= null) {
+			System.out.println("ajout user");
 			return createdUser;
+
 		}
 		return null;
 	}

@@ -24,7 +24,7 @@ public class ArticleController {
 	 * Permet de recuperer la liste des articles pour la jsp
 	 * 
 	 * @param model
-	 * @return
+	 * @return redirection vers la jsp articleList
 	 */
 	@RequestMapping("/articlesList")
 	public ModelAndView articlesList(Model model) {
@@ -36,13 +36,13 @@ public class ArticleController {
 	/**
 	 * Permet de recuperer un articles pour la jsp
 	 * 
-	 * @return
+	 * @return redirection vers le fomulaire d'edition
 	 */
 	@RequestMapping("/articleDetail/{id}")
 	public ModelAndView articleDétail(@PathVariable int id, Model model) {
 
 		model.addAttribute("article", articleService.getById(id));
-		
+
 		return new ModelAndView("articleDetail");
 	}
 
@@ -50,7 +50,7 @@ public class ArticleController {
 	 * Affiche le formulaire de creation d'un article
 	 * 
 	 * @param model
-	 * @return
+	 * @return redirection vers le fomulaire de création
 	 */
 	@RequestMapping("/articleCreate")
 	public String showCreateArticlePage(Model model) {
@@ -63,7 +63,7 @@ public class ArticleController {
 	 * 
 	 * @param id
 	 * @param model
-	 * @return
+	 * @return redirection vers le fomulaire d'edition
 	 */
 	@RequestMapping(value = "/articleUpdate/{id}")
 	public String showUpdateArticlePage(@PathVariable int id, Model model) {
@@ -76,7 +76,8 @@ public class ArticleController {
 	 * Permet de creer un article
 	 * 
 	 * @param article
-	 * @return
+	 * @return redirection vers la jsp articleList si creation ok sinon vers le
+	 *         formulaire de creation
 	 */
 	@RequestMapping(value = "/articleCreate", method = RequestMethod.POST)
 	public String createArticle(@ModelAttribute("article") ArticleDto article) {
@@ -92,25 +93,30 @@ public class ArticleController {
 	 * Permet d'editer un article
 	 * 
 	 * @param article
-	 * @return
+	 * @return redirection vers la jsp articleList si edition OK sinon vers le
+	 *         formulaire d'édition
 	 */
 	@RequestMapping(value = "/articleUpdate", method = RequestMethod.POST)
 	public String updateArticle(@ModelAttribute("article") ArticleDto article) {
 		ArticleDto updatedArticle = articleService.updateArticle(article, article.getId());
-		return "redirect:/articlesList";
+		if (updatedArticle != new ArticleDto()) {
+			return "redirect:/articlesList";
+
+		}
+		return "redirect:/articleUpdate";
 	}
 
 	/**
 	 * Permet supprimer un article
 	 * 
 	 * @param article
-	 * @return
+	 * @return redirection vers la jsp articleList
 	 */
 	@RequestMapping(value = "/articleDelete/{id}", method = RequestMethod.GET)
 	public String delete(@PathVariable int id) {
 		articleService.deleteArticle(id);
 
 		return "redirect:/articlesList";
-	}
 
+	}
 }

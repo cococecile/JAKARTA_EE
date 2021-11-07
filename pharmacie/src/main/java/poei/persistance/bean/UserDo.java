@@ -3,14 +3,17 @@ package poei.persistance.bean;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "utilisateur")
+@SequenceGenerator(name = "utilisateur_id_seq", initialValue = 1, allocationSize = 1)
 public class UserDo {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "utilisateur_id_seq")
 	@Column(name = "id", nullable = false)
 	private Integer id;
 	
@@ -30,7 +33,17 @@ public class UserDo {
 	private String mot_de_passe;
 
 	public UserDo() {
-		// TODO Auto-generated constructor stub
+		super();
+	}
+
+
+	public UserDo(Integer id, String nom, String prenom, String adresse, String email, String mot_de_passe) {
+		this.id = id;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.adresse = adresse;
+		this.email = email;
+		this.mot_de_passe = mot_de_passe;
 	}
 
 	public Integer getId() {

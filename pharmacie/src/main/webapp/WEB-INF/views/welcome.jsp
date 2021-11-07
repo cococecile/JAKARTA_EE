@@ -13,7 +13,7 @@
 <!-- Main css -->
 <link rel="stylesheet" href="/css/style.css">
 </head>
-<body><br> <br> <br>
+<body style="background-color:#4BA74D;"><br> 
 	<div>
 		<h3 style="text-align: center;">Groupe 1 - Cécile / Justine / Karima / Mireille</h3>
 	</div>
@@ -21,19 +21,19 @@
 	<section class="signup">
 		<div class="container">
 			<br>
+			<img src="	https://www.pod.fr/wp-content/uploads/2020/05/que-signifie-l-embleme-de-la-pharmacie-1.jpg"height="400px" width=2000px"/>
 			<div>
-				<h2 style="text-align: center;">GESTION - PHARMA Articles</h2>
+				<h2 style="text-align: center;">GESTION - PHARMACIE Articles</h2>
 			</div>
 			<div class="signup-image">
 			<c:if test="${not empty nom}">
 				<center><h1>Welcome, ${nom}</h1></center>
 			</c:if>
-				<br>
+				
 				<br>
 				<div style="display: flex; justify-content: space-between;">
-					<a href="${pageContext.request.contextPath}/user/login" class="signup-image-link">Login</a> 
-<%-- 					<a href="${pageContext.request.contextPath}/user/updateUser/${user.id}" class="signup-image-link">Update Profile</a> --%>
-					<a href="${pageContext.request.contextPath}/user/articles" class="signup-image-link">View Articles</a>
+					<a href="login" class="signup-image-link">Login</a> 
+					<a href="${pageContext.request.contextPath}/create-user" class="signup-image-link">Creer un Compte</a>
 					<a href="${pageContext.request.contextPath}/user/" class="signup-image-link">Logout</a>
 				</div>
 			</div>
