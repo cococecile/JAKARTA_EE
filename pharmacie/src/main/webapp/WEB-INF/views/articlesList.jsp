@@ -36,6 +36,6 @@
 	<a href="/articleCreate">Create Article</a>
 	<br>
 	<a href="/welcome">Welcome</a>
-
+	<%@include file="footer.jsp"%>
 </body>
 </html>

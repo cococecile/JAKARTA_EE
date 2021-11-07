@@ -39,6 +39,6 @@
 		</table>
 	</form:form>
 	<section></section>
-
+	<%@include file="footer.jsp"%>
 </body>
 </html>

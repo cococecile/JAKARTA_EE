@@ -40,6 +40,8 @@ public class PharmacieApplication extends SpringBootServletInitializer {
 		SpringApplication.run(PharmacieApplication.class, args);
 	}
 
+
+
 	@Bean(name = "dataSource")
 	public DataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();

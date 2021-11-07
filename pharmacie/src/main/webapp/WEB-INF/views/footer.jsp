@@ -1,21 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body style="background-color: #4BA74D;">
-
-	<br>
-	<div style="display: flex; justify-content: space-between;">
-		<a href="login" class="signup-image-link">Login</a> <a
-			href="${pageContext.request.contextPath}/user/articlesList"
-			class="signup-image-link">View Articles</a> <a
-			href="${pageContext.request.contextPath}/user/"
-			class="signup-image-link">Logout</a>
-	</div>
-	
-</body>
+</div><!-- #container -->
+<hr>
+<footer style="text-align: center;">
+	Coded with &hearts; by <a href="">groupe1</a> <strong>PharmacieApp  </strong><strong>Simplon x Capgemini</strong>
+</footer>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	</body>
 </html>

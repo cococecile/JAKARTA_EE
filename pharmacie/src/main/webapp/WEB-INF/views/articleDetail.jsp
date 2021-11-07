@@ -21,7 +21,7 @@
 			<td>${article.description}</td>
 		</tr>
 		<tr>
-			<td>Quantité :</td>
+			<td>Quantitï¿½ :</td>
 			<td>${article.quantite}</td>
 		</tr>
 
@@ -41,3 +41,4 @@
 	<a href="/articlesList">Retour liste des Articles</a>
 </body>
 </html>
+	<%@include file="footer.jsp"%>

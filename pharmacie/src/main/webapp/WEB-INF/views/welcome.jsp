@@ -3,17 +3,21 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>User | Home</title>
 <!-- Main css -->
-<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/static/css/style.css">
 </head>
-<body style="background-color:#4BA74D;"><br> 
+<body style="background-color:00000;"><br> 
+<%@include file="header.jsp"%>
+
 	<div>
 		<h3 style="text-align: center;">Groupe 1 - Cécile / Justine / Karima / Mireille</h3>
 	</div>
@@ -40,5 +44,6 @@
 			<br> <br> <br>
 		</div>
 	</section>
+	<%@include file="footer.jsp"%>
 </body>
 </html>
