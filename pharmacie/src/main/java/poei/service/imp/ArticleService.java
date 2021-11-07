@@ -29,14 +29,15 @@ public class ArticleService implements IArticleService {
 	 * @param ArticleDo
 	 * @return articleDto
 	 */
-	public ArticleDto mapToArticleDto(ArticleDo ArticleDo) {
+	public ArticleDto mapToArticleDto(ArticleDo articleDo) {
 		ArticleDto articleDto = new ArticleDto();
-		if (ArticleDo == null) {
+		if (articleDo == null) {
 			return null;
 		}
-		articleDto.setId(ArticleDo.getId());
-		articleDto.setDesignation(ArticleDo.getDesignation());
-		articleDto.setDescription(ArticleDo.getDescription());
+		articleDto.setId(articleDo.getId());
+		articleDto.setDesignation(articleDo.getDesignation());
+		articleDto.setDescription(articleDo.getDescription());
+		articleDto.setQuantite(articleDo.getQuantite());
 		return articleDto;
 	}
 
@@ -51,9 +52,16 @@ public class ArticleService implements IArticleService {
 		if (articleDto == null) {
 			return null;
 		}
+
+//		if (articleDto.getId() == 0) {
+//			articleDo.setId(100);
+//		}else {
+
 		articleDo.setId(articleDto.getId());
+//		}
 		articleDo.setDesignation(articleDto.getDesignation());
 		articleDo.setDescription(articleDto.getDescription());
+		articleDo.setQuantite(articleDto.getQuantite());
 		return articleDo;
 	}
 
@@ -82,7 +90,8 @@ public class ArticleService implements IArticleService {
 
 	@Override
 	public ArticleDto create(final ArticleDto articleDto) {
-		final ArticleDto newArticle = mapToArticleDto(articleDao.createArticle(mapToArticleDo(articleDto)));
+		final ArticleDo article = articleDao.createArticle(mapToArticleDo(articleDto));
+		final ArticleDto newArticle = mapToArticleDto(article);
 		if (null != newArticle) {
 			return newArticle;
 

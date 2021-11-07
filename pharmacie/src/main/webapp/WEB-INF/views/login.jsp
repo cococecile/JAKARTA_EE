@@ -17,15 +17,18 @@
 <!-- Main css -->
 <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body style="background-color:#4BA74D;">
 	<div>
 		<h3 style="text-align: center;">Groupe 1 - Cécile / Justine / Karima / Mireille</h3>
 	</div>
+	
 	<!-- Sing in  Form -->
 	<section class="sign-in">
 		<div class="container">
 			<div class="signin-content">
 				<div class="signin-image">
+					    <img src="	https://img.myloview.fr/papiers-peints/user-icon-lock-securite-mot-de-passe-connexion-user-icon-in-glyph-vector-illustration-400-72163148.jpg"height="200px" width=200px"/>
+				
 					<figure>
 						<img src="/images/signin-image.jpg" alt="sing up image">
 					</figure>

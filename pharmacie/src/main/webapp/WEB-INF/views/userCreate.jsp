@@ -1,30 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Employee | Sign up</title>
-<!-- Font Icon -->
-<link rel="stylesheet"
-	href="/fonts/material-icon/css/material-design-iconic-font.min.css">
-<!-- Main css -->
-<link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-	<div>
-		<h3 style="text-align: center;">Groupe 1 - Cécile / Justine /
-			Karima / Mireille</h3>
-	</div>
-	<!-- Subscribe -->
-	<section></section>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Inscription</title>
+        <link type="text/css" rel="stylesheet" href="form.css" />
+    </head>
+   <<body style="background-color:#4BA74D;">
+        <form method="post" action="welcome">
+            <fieldset>
+                <legend>Inscription</legend>
+                <p>Vous pouvez vous inscrire via ce formulaire.</p>
+                <img src="	https://img.myloview.fr/papiers-peints/user-icon-lock-securite-mot-de-passe-connexion-user-icon-in-glyph-vector-illustration-400-72163148.jpg"height="20px" width=20px"/>
 
-	<!-- JS -->
+                <label for="email">Adresse email <span class="requis">*</span></label>
+                <input type="email" id="email" name="email" value="<c:out value="${param.email}"/>" size="20" maxlength="60" />
+                <span class="erreur">${erreurs['email']}</span>
+                <br />
 
-</body>
+                <label for="motdepasse">Mot de passe <span class="requis">*</span></label>
+                <input type="password" id="motdepasse" name="motdepasse" value="" size="20" maxlength="20" />
+                <span class="erreur">${erreurs['motdepasse']}</span>
+                <br />
+
+                <label for="confirmation">Confirmation du mot de passe <span class="requis">*</span></label>
+                <input type="password" id="confirmation" name="confirmation" value="" size="20" maxlength="20" />
+                <span class="erreur">${erreurs['confirmation']}</span>
+                <br />
+
+                <label for="nom">Nom d'utilisateur</label>
+                <input type="text" id="nom" name="nom" value="<c:out value="${param.nom}"/>" size="20" maxlength="20" />
+                <span class="erreur">${erreurs['nom']}</span>
+                <br />
+
+                <input type="submit" value="welcome" class="sansLabel" />
+                <br />
+
+                <p class="${empty erreurs ? 'succes' : 'erreur'}">${resultat}</p>
+            </fieldset>
+        </form>
+    </body>
 </html>
