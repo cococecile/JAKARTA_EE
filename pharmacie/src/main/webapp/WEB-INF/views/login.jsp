@@ -3,12 +3,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Employee | Sign in</title>
+<title>Users | Sign in</title>
 
 <!-- Font Icon -->
 <link rel="stylesheet"
@@ -19,7 +19,7 @@
 </head>
 <body style="background-color:#4BA74D;">
 	<div>
-		<h3 style="text-align: center;">Groupe 1 - Cécile / Justine / Karima / Mireille</h3>
+		<h3 style="text-align: center;">Groupe 1 - Cï¿½cile / Justine / Karima / Mireille</h3>
 	</div>
 	
 	<!-- Sing in  Form -->
@@ -33,12 +33,12 @@
 						<img src="/images/signin-image.jpg" alt="sing up image">
 					</figure>
 					<div style="display: flex; justify-content: space-between;">
-						<a href="subscribe"
+						<a href="create-user"
 							class="signup-image-link">Create an account</a> <a
 							href="welcome"
 							class="signup-image-link">Go Home</a>
 					</div>
-					<spring:url value="/user/validateUser" var="sign-in-URL" />
+					<spring:url value="/create-user" var="sign-in-URL" />
 				</div>
 
 				<div class="signin-form">

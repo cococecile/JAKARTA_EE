@@ -28,10 +28,7 @@ public class UserService implements IUserService {
 	 */
 	public UserDto mapToUserDto(final UserDo user) {
 		 UserDto userDto = new UserDto();
-		 if (userDto == null) {
-			return null;
-		}
-		userDto.setId(user.getId());
+		 userDto.setId(user.getId());
 		userDto.setNom(user.getNom());
 		userDto.setPrenom(user.getPrenom());
 		userDto.setAdresse(user.getAdresse());

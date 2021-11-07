@@ -3,6 +3,7 @@
 
 <h1>Update User</h1>
 <form:form method="POST" action="/update-user" modelAttribute="user">
+<form:hidden path="id" />
     <table>
         <tr>
             <td>nom: </td>
@@ -27,6 +28,7 @@
         <tr>
             <td></td>
             <td><input type="submit" value="Submit"/></td>
+            <td><a href="${pageContext.request.contextPath}/read-user">Cancel</a></td>
         </tr>
     </table>
 </form:form>

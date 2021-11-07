@@ -86,7 +86,7 @@ public class UserDao implements IUserDao {
 
 		final StringBuilder hqlQuery = new StringBuilder();
 		hqlQuery.append(
-				"update UserDo  set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where u.id = :id");
+				"update UserDo  set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where id = :id");
 
 		final Query<?> query = session.createQuery(hqlQuery.toString());
 		// intialisation des paramètres

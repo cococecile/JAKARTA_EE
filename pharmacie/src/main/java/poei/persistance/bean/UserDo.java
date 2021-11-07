@@ -29,11 +29,11 @@ public class UserDo {
 	@Column(name = "email", length = 128, nullable = false)
 	private String email;
 	
-	@Column(name = "", length = 128, nullable = false)
+	@Column(name = "mot_de_passe", length = 128, nullable = false)
 	private String mot_de_passe;
 
 	public UserDo() {
-		super();
+		
 	}
 
 
