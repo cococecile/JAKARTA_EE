@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,6 +34,7 @@ public class UserController {
 
 	/**
 	 * Permet d'afficher le formulaire de création d'un user
+	 * 
 	 * @param model
 	 * @return direction vers la jsp userCreate
 	 */
@@ -45,16 +45,16 @@ public class UserController {
 		return "userCreate";
 	}
 
-	
 	/**
 	 * Permet de créer un user
+	 * 
 	 * @param user
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/create-user", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute("user") UserDto user) {
-		UserDto newUser = userService.createUser(user);
+		UserDto newUser = userService.create(user);
 		if (null != newUser) {
 			return "redirect:/read-user";
 		}
@@ -71,7 +71,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update-user/{id}", method = RequestMethod.POST)
-	public String updateUser(@PathVariable int id, @ModelAttribute("UserDo") UserDto user) {
+	public String updateUser(@PathVariable int id, @ModelAttribute("user") UserDto user) {
 		userService.updateUSer(user, id);
 		return "redirect:/read-user";
 	}
@@ -81,4 +81,5 @@ public class UserController {
 		userService.delete(id);
 		return "redirect:/read-user";
 	}
+
 }

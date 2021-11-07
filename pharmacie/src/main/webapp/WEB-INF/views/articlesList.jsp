@@ -37,7 +37,5 @@
 	<br>
 	<a href="/welcome">Welcome</a>
 
-
-
 </body>
 </html>

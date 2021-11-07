@@ -36,7 +36,7 @@ public interface IUserService {
 	 * @param userDto
 	 * @return createdUser
 	 */
-	UserDto createUser(final UserDto userDto);
+	UserDto create(final UserDto userDto);
 
 	/**
 	 * Permet de mettre à jour un user

@@ -20,10 +20,6 @@ public class UserDao implements IUserDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public UserDao() {
-		// Empty method
-	}
-
 	@Override
 	public List<UserDo> findAllUser() {
 		String req = "From UserDo";

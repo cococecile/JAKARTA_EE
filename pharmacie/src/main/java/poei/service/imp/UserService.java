@@ -12,7 +12,7 @@ import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
 import poei.util.cryptage.MD5Encryption;
 
-@Service("UserService")
+@Service
 public class UserService implements IUserService {
 
 	@Autowired
@@ -26,8 +26,11 @@ public class UserService implements IUserService {
 	 * @param user
 	 * @return userDto
 	 */
-	public UserDto mapToDto(final UserDo user) {
-		final UserDto userDto = new UserDto();
+	public UserDto mapToUserDto(final UserDo user) {
+		 UserDto userDto = new UserDto();
+		 if (userDto == null) {
+			return null;
+		}
 		userDto.setId(user.getId());
 		userDto.setNom(user.getNom());
 		userDto.setPrenom(user.getPrenom());
@@ -46,7 +49,7 @@ public class UserService implements IUserService {
 	public List<UserDto> mapToListDto(final List<UserDo> listeUserDo) {
 		final List<UserDto> listeUserDto = new ArrayList<>();
 		for (final UserDo userDo : listeUserDo) {
-			listeUserDto.add(mapToDto(userDo));
+			listeUserDto.add(mapToUserDto(userDo));
 		}
 		return listeUserDto;
 	}
@@ -57,13 +60,18 @@ public class UserService implements IUserService {
 	 * @param userDto
 	 * @return le userDo
 	 */
-	public UserDo mapToDo(final UserDto userDto) {
-		final String newPassword = MD5Encryption.encrypt(userDto.getMot_de_passe());
-		final UserDo userDo = UserDo.buildUserDo(userDto.getId(), userDto.getNom(), userDto.getPrenom(),
-				userDto.getAdresse(), newPassword, userDto.getEmail());
+	public UserDo mapToUserDo(UserDto user) {
+		UserDo userDo = new UserDo();
+		userDo.setId(user.getId());
+		userDo.setNom(user.getNom());
+		userDo.setPrenom(user.getPrenom());
+		userDo.setAdresse(user.getAdresse());
+		userDo.setMot_de_passe(user.getMot_de_passe());
+		userDo.setEmail(user.getEmail());
+
 		return userDo;
 	}
-
+	
 	@Override
 	public List<UserDto> findAll() {
 		final List<UserDo> users = userDao.findAllUser();
@@ -78,14 +86,14 @@ public class UserService implements IUserService {
 		final String cryptPassword = MD5Encryption.encrypt(password);
 		final UserDo connectedUser = userDao.findConnectedUSer(email,cryptPassword);
 		if (null != connectedUser) {
-			return mapToDto(connectedUser);
+			return mapToUserDto(connectedUser);
 		}
 		return null;
 	}
 
 	@Override
 	public UserDto findUser(final int id) {
-		final UserDto userDto = mapToDto(userDao.findUser(id));
+		final UserDto userDto = mapToUserDto(userDao.findUser(id));
 		if (userDto != null) {
 			return userDto;
 		} 
@@ -93,9 +101,9 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserDto createUser(final UserDto userDto) {
-		final UserDo user = userDao.create(mapToDo(userDto));
-		final UserDto newUser = mapToDto(user);
+	public UserDto create(final UserDto userDto) {
+		final UserDo user = userDao.create(mapToUserDo(userDto));
+		final UserDto newUser = mapToUserDto(user);
 		if (null != newUser) {
 			return newUser;
 
@@ -106,7 +114,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDto updateUSer(final UserDto userDto, final int id) {
-		final UserDto updatedUser = mapToDto(userDao.update(mapToDo(userDto), id));
+		final UserDto updatedUser = mapToUserDto(userDao.update(mapToUserDo(userDto), id));
 		if (updatedUser != null) {
 			return updatedUser;
 		}
