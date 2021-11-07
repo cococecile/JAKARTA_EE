@@ -1,15 +1,15 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<h1>Create User</h1>
+<h1>Update User</h1>
 <form:form method="post" action="/create-user" modelAttribute="user">
     <table>
         <tr>
-            <td>Name: </td>
+            <td>nom: </td>
             <td><form:input path="nom"/></td>
         </tr>
          <tr>
-            <td>Name: </td>
+            <td>prenom : </td>
             <td><form:input path="prenom"/></td>
         </tr>
         <tr>

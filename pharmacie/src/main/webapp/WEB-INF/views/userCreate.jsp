@@ -34,16 +34,16 @@
         </tr>
         <tr>
             <td>Adresse: </td>
-            <td><form:input  autocomplete="username" path="adresse"/></td>
+            <td><form:input   path="adresse"/></td>
         </tr>
 		 <tr>
             <td>Password: </td>
-            <td><form:input   autocomplete="current-password"   path="mot_de_passe"/></td>
+            <td><form:input      path="mot_de_passe"/></td>
         </tr>
 
         <tr>
             <td></td>
-            <td><input type="submit" value="Create"/> <a
+            <td><input type="submit" value="Submit"/> <a
 					href="read-user">Cancel</a></td>
         </tr>
     </table>
