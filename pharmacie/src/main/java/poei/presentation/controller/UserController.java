@@ -1,6 +1,5 @@
 package poei.presentation.controller;
 
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import poei.presentation.bean.UserDto;
 import poei.service.IUserService;
@@ -67,10 +67,10 @@ public class UserController {
         return "redirect:/read-user";
     }
 
-    @RequestMapping(value = "/delete-user/{id}")
-    public String deleteUser(@PathVariable int id) {
-        userService.delete(id);
-        return "redirect:/read-user";
-    }
+	@RequestMapping(value = "/delete-user/{id}")
+	public String deleteUser(@PathVariable int id) {
+		userService.delete(id);
+		return "redirect:/read-user";
+	}
 }
 

@@ -78,6 +78,9 @@
 		</dependency>
 
 	<!-- Spring test and JUnit 5 libraries -->
+
+		<!-- Spring test and JUnit 5 libraries -->
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
