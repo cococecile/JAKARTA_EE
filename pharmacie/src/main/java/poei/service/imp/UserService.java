@@ -102,6 +102,8 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDto create(final UserDto userDto) {
+		String password =MD5Encryption.encrypt(userDto.getMot_de_passe());
+		userDto.setMot_de_passe(password);
 		final UserDo user = userDao.create(mapToUserDo(userDto));
 		final UserDto newUser = mapToUserDto(user);
 		if (null != newUser) {
@@ -114,11 +116,20 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserDto updateUSer(final UserDto userDto, final int id) {
-		final UserDto updatedUser = mapToUserDto(userDao.update(mapToUserDo(userDto), id));
-		if (updatedUser != null) {
-			return updatedUser;
-		}
-		return null;
+		UserDo userDo = userDao.findUser(id);
+        if (null != userDo) {
+
+            userDo.setId(userDto.getId());
+        userDo.setNom(userDto.getNom());
+        userDo.setPrenom(userDto.getPrenom());
+        userDo.setAdresse(userDto.getAdresse());
+        userDo.setMot_de_passe(userDto.getMot_de_passe());
+        userDo.setEmail(userDto.getEmail());
+            final UserDo updatedUser = userDao.update(userDo, id);
+            return mapToUserDto(updatedUser);
+        }
+
+        return null;
 	}
 
 	@Override

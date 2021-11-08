@@ -3,49 +3,41 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Créer Article</title>
-<link type="text/css" rel="stylesheet" href="form.css" />
-</head>
+<br>
+<!-- Navbar -->
+<jsp:include page="header.jsp"></jsp:include>
+<!-- Navbar -->
+<br>
+<form:form action="articleCreate" method="POST" modelAttribute="article">
 
-<body style="background-color: #4BA74D;">
+	<fieldset>
 
-	<form:form action="articleCreate" method="POST"
-		modelAttribute="article">
+		<h1 style="text-align: center;">Creation d'acticle</h1>
+		<p style="text-align: center;">Vous pouvez vous créer un nouvel article via ce formulaire.</p>
 
-		<fieldset>
-
-			<legend>Creation d'acticle</legend>
-			<p>Vous pouvez vous créer un nouvel article via ce formulaire.</p>
-
-			<form:hidden path="id" />
-			<table>
-				<tr>
-					<td>Désignation :</td>
-					<td><form:input path="designation" /></td>
-				</tr>
-				<tr>
-					<td>Description :</td>
-					<td><form:input path="description" /></td>
-				</tr>
-				<tr>
-					<td>Quantité :</td>
-					<td><form:input path="quantite" /></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td><input type="submit" value="Submit" /></td>
-					<td><a href="articlesList">Cancel</a></td>
-					<td>&nbsp;</td>
-				</tr>
-			</table>
-		</fieldset>
-	</form:form>
-
-	<section></section>
-
-</body>
-</html>
+		<form:hidden path="id" />
+		<table>
+			<tr>
+				<td>Désignation :</td>
+				<td><form:input path="designation" /></td>
+			</tr>
+			<tr>
+				<td>Description :</td>
+				<td><form:input path="description" /></td>
+			</tr>
+			<tr>
+				<td>Quantité :</td>
+				<td><form:input path="quantite" /></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><input type="submit" value="Submit" /></td>
+				<td><a href="articlesList">Cancel</a></td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</fieldset>
+</form:form>
+<!-- Footer -->
+<jsp:include page="footer.jsp"></jsp:include>
+<!-- Footer -->

@@ -54,7 +54,7 @@ public class UserDao implements IUserDao {
 		final Session session = sessionFactory.getCurrentSession();
 
 		final Query<UserDo> query = session
-				.createQuery("From UserDo where email = :email and mot_de_passe = :mot_de_passe", UserDo.class);
+				.createQuery("From UserDo where email = :email and MD5(mot_de_passe) = :mot_de_passe", UserDo.class);
 		// on initialise le paramètre
 		query.setParameter("email", email);
 		query.setParameter("mot_de_passe", mot_de_passe);
@@ -82,26 +82,29 @@ public class UserDao implements IUserDao {
 	@Override
 	public UserDo update(final UserDo userDo, final int id) {
 		final Session session = sessionFactory.getCurrentSession();
-		// sans auto-commit , on doit créer une transaction
+        // sans auto-commit , on doit créer une transaction
 
-		final StringBuilder hqlQuery = new StringBuilder();
-		hqlQuery.append(
-				"update userDo  set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where u.id = :id");
+        final StringBuilder hqlQuery = new StringBuilder();
+        hqlQuery.append(
+                "update UserDo  set nom = :nom, prenom = :prenom,adresse = :adresse, email = :email, mot_de_passe = :mot_de_passe  where id = :id");
 
-		final Query<?> query = session.createQuery(hqlQuery.toString());
-		// intialisation des paramètres
-		query.setParameter("nom", userDo.getNom());
-		query.setParameter("prenom", userDo.getPrenom());
-		query.setParameter("adresse", userDo.getAdresse());
-		query.setParameter("email", userDo.getEmail());
-		query.setParameter("mot_de_passe", userDo.getMot_de_passe());
-		query.executeUpdate();
+        final Query<?> query = session.createQuery(hqlQuery.toString());
+        // intialisation des paramètres
+        query.setParameter("id", userDo.getId());
+        query.setParameter("nom", userDo.getNom());
+        query.setParameter("prenom", userDo.getPrenom());
+        query.setParameter("adresse", userDo.getAdresse());
+        query.setParameter("email", userDo.getEmail());
+        query.setParameter("mot_de_passe", userDo.getMot_de_passe());
+        int modifications = query.executeUpdate();
 
-		session.flush();
+        if (modifications == 1) {
+            return userDo;
+        }
 
-		// on "complète" le Do à retourner
-		userDo.setId(id);
-		return userDo;
+        session.flush();
+
+        return new UserDo();
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package poei.presentation.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +58,7 @@ public class UserController {
 	public String createUser(@ModelAttribute("user") UserDto user) {
 		UserDto newUser = userService.create(user);
 		if (null != newUser) {
-			return "redirect:/articlesList";
+			return "redirect:/read-user";
 		}
 
 		return "redirect:/create-user";
@@ -64,22 +66,56 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/update-user/{id}")
-	public String showUpdateUserPage(@PathVariable int id, Model model) {
-		model.addAttribute("id", id);
-		model.addAttribute("command", userService.findUser(id));
-		return "userUpdate";
-	}
+    public String showUpdateUserPage(@PathVariable int id, Model model) {
+        model.addAttribute("id", id);
+        model.addAttribute("user", userService.findUser(id));
+        return "userUpdate";
+    }
 
-	@RequestMapping(value = "/update-user/{id}", method = RequestMethod.POST)
-	public String updateUser(@PathVariable int id, @ModelAttribute("user") UserDto user) {
-		userService.updateUSer(user, id);
-		return "redirect:/read-user";
-	}
+    @RequestMapping(value = "/update-user", method = RequestMethod.POST)
+    public String updateUser(@ModelAttribute("user") UserDto user) {
+        UserDto updatedUser= userService.updateUSer(user, user.getId());
+        if (updatedUser != new UserDto()) {
+            return "redirect:/read-user";
+
+        }
+        return "redirect:/update-user";
+
+    }
 
 	@RequestMapping(value = "/delete-user/{id}")
 	public String deleteUser(@PathVariable int id) {
 		userService.delete(id);
 		return "redirect:/read-user";
+	}
+	
+	/**
+	 * Permet de recuperer le connectedUSer
+	 * 
+	 * @return redirection vers la jsp infoUser
+	 */
+	@RequestMapping("/user")
+	public ModelAndView getUserAccount(HttpSession session, Model model) {
+		
+		UserDto userDto = (UserDto) session.getAttribute("connectedUser");
+
+		model.addAttribute("user",userDto);
+
+		return new ModelAndView("userInfo");
+	}
+	
+	/**
+	 * Permet de recuperer un user à partir de son id 
+	 * 
+	 * @return redirection vers la jsp infoUser
+	 */
+	@RequestMapping("/user/{id}")
+	public ModelAndView getUser(@PathVariable int id, Model model) {
+		
+		
+		model.addAttribute("user",userService.findUser(id));
+
+		return new ModelAndView("userInfo");
 	}
 
 }

@@ -34,9 +34,9 @@ public class ArticleController {
 	}
 
 	/**
-	 * Permet de recuperer un articles pour la jsp
+	 * Permet de recuperer un article 
 	 * 
-	 * @return redirection vers le fomulaire d'edition
+	 * @return redirection vers la jsp articleDetail
 	 */
 	@RequestMapping("/articleDetail/{id}")
 	public ModelAndView articleDétail(@PathVariable int id, Model model) {
